@@ -1,10 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  Link,
+  RealtimeDatabaseService,
+} from './services/realtimedatabase.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'homepage-project';
+export class AppComponent implements OnInit {
+  modalOpen = false;
+  links: Observable<Link[]>;
+  linkToAdd: Link = {
+    section: '',
+    url: '',
+    title: '',
+    icon: '',
+  };
+
+  constructor(private realtimeDb: RealtimeDatabaseService) {
+    this.links = this.realtimeDb.getLinks();
+  }
+
+  ngOnInit(): void {}
+
+  addLink() {
+    if (
+      this.linkToAdd.section === '' ||
+      this.linkToAdd.url === '' ||
+      this.linkToAdd.title === '' ||
+      this.linkToAdd.icon === ''
+    ) {
+      alert('Please fill out all fields');
+      return;
+    }
+    this.realtimeDb.addLinkToDb(this.linkToAdd);
+    this.resetLinkToAdd();
+  }
+
+  resetLinkToAdd() {
+    this.linkToAdd = {
+      section: '',
+      url: '',
+      title: '',
+      icon: '',
+    };
+  }
+
+  openModal() {
+    this.modalOpen = true;
+  }
+
+  closeModal() {
+    this.modalOpen = false;
+  }
 }

@@ -163,13 +163,18 @@ h2 i {
   padding: 20px;
   border: 1px solid var(--coral);
   width: 50%;
+  z-index: 2;
 }
 
 .close {
   color: var(--coral);
   float: right;
-  font-size: 28px;
+  font-size: 34px;
   cursor: pointer;
+}
+
+#link-form {
+  margin-top: 3em;
 }
 
 .modal-content label {
@@ -216,4 +221,13 @@ h2 i {
   & > a {
     font-family: "Press Start 2P", cursive !important;
   }
+}
+
+.section-header {
+  cursor: pointer;
+}
+
+.closed {
+  color: var(--coral);
+  margin: 2.5em 0;
 }

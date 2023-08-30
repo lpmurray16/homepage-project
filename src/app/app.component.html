@@ -1,5 +1,11 @@
-<h2>Favorites<i class="fa-solid fa-star"></i></h2>
-<div class="section static">
+<h2
+  (click)="toggleSection('favorites')"
+  class="section-header"
+  [class.closed]="!isSectionOpen['favorites']"
+>
+  Favorites<i class="fa-solid fa-star"></i>
+</h2>
+<div *ngIf="isSectionOpen['favorites']" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'favorites'">
       <a
@@ -14,8 +20,14 @@
   </ng-container>
 </div>
 
-<h2>Other<i class="fa-solid fa-grip"></i></h2>
-<div class="section static">
+<h2
+  (click)="toggleSection('others')"
+  class="section-header"
+  [class.closed]="!isSectionOpen['others']"
+>
+  Other<i class="fa-solid fa-grip"></i>
+</h2>
+<div *ngIf="isSectionOpen['others']" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'others'">
       <a
@@ -30,8 +42,14 @@
   </ng-container>
 </div>
 
-<h2>Servers<i class="fa-solid fa-server"></i></h2>
-<div class="section static">
+<h2
+  (click)="toggleSection('servers')"
+  class="section-header"
+  [class.closed]="!isSectionOpen['servers']"
+>
+  Servers<i class="fa-solid fa-server"></i>
+</h2>
+<div *ngIf="isSectionOpen['servers']" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'servers'">
       <a
@@ -46,8 +64,14 @@
   </ng-container>
 </div>
 
-<h2>Personal<i class="fa-solid fa-grip"></i></h2>
-<div class="section static">
+<h2
+  (click)="toggleSection('personal')"
+  class="section-header"
+  [class.closed]="!isSectionOpen['personal']"
+>
+  Personal<i class="fa-solid fa-grip"></i>
+</h2>
+<div *ngIf="isSectionOpen['personal']" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'personal'">
       <a
@@ -62,10 +86,17 @@
   </ng-container>
 </div>
 
-<div id="floating-button" (click)="openModal()" class="floating-button">+</div>
+<div
+  id="floating-button"
+  (click)="openModal()"
+  class="floating-button"
+  #openModalButton
+>
+  +
+</div>
 
-<div id="modal" class="modal" [class.open]="modalOpen">
-  <div class="modal-content">
+<div id="modal" class="modal" [class.open]="modalOpen" #myModal>
+  <div class="modal-content" #myModal>
     <span class="close" (click)="closeModal()">&times;</span>
     <form id="link-form">
       <label for="section">Choose a section:</label>

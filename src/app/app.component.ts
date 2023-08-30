@@ -20,11 +20,20 @@ export class AppComponent implements OnInit {
     icon: '',
   };
 
+  isSectionOpen: { [key: string]: boolean } = {
+    favorites: true,
+    others: true,
+    servers: true,
+    personal: true,
+  };
+
   constructor(private realtimeDb: RealtimeDatabaseService) {
     this.links = this.realtimeDb.getLinks();
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy() {}
 
   addLink() {
     if (
@@ -38,6 +47,10 @@ export class AppComponent implements OnInit {
     }
     this.realtimeDb.addLinkToDb(this.linkToAdd);
     this.resetLinkToAdd();
+  }
+
+  toggleSection(section: string): void {
+    this.isSectionOpen[section] = !this.isSectionOpen[section];
   }
 
   resetLinkToAdd() {

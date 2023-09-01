@@ -69,6 +69,11 @@ h2 {
   box-shadow: 5px 5px 3px -3px rgba(0, 0, 0, 0.35);
   overflow: hidden;
   position: relative;
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+    padding: 10px;
+  }
 }
 
 .favorite i,
@@ -117,6 +122,11 @@ h2 i {
   border: 2px solid var(--coral);
   padding: 30px;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+    padding: 10px;
+  }
 }
 
 .favorite:hover {
@@ -128,6 +138,11 @@ h2 i {
   border: 2px solid var(--royal-purple);
   padding: 30px;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+    padding: 10px;
+  }
 }
 
 button {
@@ -144,6 +159,11 @@ button {
   transition: all 0.3s ease;
   font-size: 16px; // You can adjust this
   text-decoration: none;
+  font-family: "Press Start 2P", cursive !important;
+  @media screen and (max-width: 768px) {
+    font-size: 11px;
+    padding: 10px;
+  }
 
   &:hover {
     transform: scale(1.05);
@@ -319,4 +339,10 @@ button {
 
 .fa-times {
   font-size: 12px;
+}
+
+.remove-mode-bttn {
+  @media screen and (max-width: 768px) {
+    margin-bottom: 2em;
+  }
 }

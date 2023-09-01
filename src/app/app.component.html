@@ -10,26 +10,28 @@
   Favorites<i class="fa-solid fa-star"></i>
 </h2>
 <div *ngIf="isSectionOpen['favorites']" class="section static">
-  <div *ngFor="let link of links | async">
-    <div *ngIf="link.section === 'favorites'" class="link-container">
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        class="favorite"
-        [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
-        href="{{ link.url }}"
-      >
-        <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
-      </a>
-      <span
-        *ngIf="isDeleteMode"
-        class="remove-icon"
-        (click)="removeLinkById(link)"
-      >
-        <i class="fa fa-times"></i>
-      </span>
-    </div>
-  </div>
+  <ng-container *ngFor="let link of links | async">
+    <ng-container *ngIf="link.section === 'favorites'">
+      <div class="link-container">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          class="favorite"
+          [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
+          href="{{ link.url }}"
+        >
+          <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
+        </a>
+        <span
+          *ngIf="isDeleteMode"
+          class="remove-icon"
+          (click)="removeLinkById(link)"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>
 
 <h2
@@ -40,26 +42,28 @@
   Other<i class="fa-solid fa-grip"></i>
 </h2>
 <div *ngIf="isSectionOpen['others']" class="section static">
-  <div *ngFor="let link of links | async">
-    <div *ngIf="link.section === 'others'" class="link-container">
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        class="favorite other"
-        [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
-        href="{{ link.url }}"
-      >
-        <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
-      </a>
-      <span
-        *ngIf="isDeleteMode"
-        class="remove-icon"
-        (click)="removeLinkById(link)"
-      >
-        <i class="fa fa-times"></i>
-      </span>
-    </div>
-  </div>
+  <ng-container *ngFor="let link of links | async">
+    <ng-container *ngIf="link.section === 'others'">
+      <div class="link-container">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          class="favorite other"
+          [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
+          href="{{ link.url }}"
+        >
+          <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
+        </a>
+        <span
+          *ngIf="isDeleteMode"
+          class="remove-icon"
+          (click)="removeLinkById(link)"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>
 
 <h2
@@ -70,26 +74,28 @@
   Servers<i class="fa-solid fa-server"></i>
 </h2>
 <div *ngIf="isSectionOpen['servers']" class="section static">
-  <div *ngFor="let link of links | async">
-    <div *ngIf="link.section === 'servers'" class="link-container">
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        class="favorite other"
-        [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
-        href="{{ link.url }}"
-      >
-        <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
-      </a>
-      <span
-        *ngIf="isDeleteMode"
-        class="remove-icon"
-        (click)="removeLinkById(link)"
-      >
-        <i class="fa fa-times"></i>
-      </span>
-    </div>
-  </div>
+  <ng-container *ngFor="let link of links | async">
+    <ng-container *ngIf="link.section === 'servers'">
+      <div class="link-container">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          class="favorite other"
+          [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
+          href="{{ link.url }}"
+        >
+          <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
+        </a>
+        <span
+          *ngIf="isDeleteMode"
+          class="remove-icon"
+          (click)="removeLinkById(link)"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>
 
 <h2
@@ -100,26 +106,28 @@
   Personal<i class="fa-solid fa-grip"></i>
 </h2>
 <div *ngIf="isSectionOpen['personal']" class="section static">
-  <div *ngFor="let link of links | async">
-    <div *ngIf="link.section === 'personal'" class="link-container">
-      <a
-        target="_blank"
-        rel="noreferrer noopener"
-        class="favorite"
-        [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
-        href="{{ link.url }}"
-      >
-        <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
-      </a>
-      <span
-        *ngIf="isDeleteMode"
-        class="remove-icon"
-        (click)="removeLinkById(link)"
-      >
-        <i class="fa fa-times"></i>
-      </span>
-    </div>
-  </div>
+  <ng-container *ngFor="let link of links | async">
+    <ng-container *ngIf="link.section === 'personal'">
+      <div class="link-container">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          class="favorite"
+          [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
+          href="{{ link.url }}"
+        >
+          <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
+        </a>
+        <span
+          *ngIf="isDeleteMode"
+          class="remove-icon"
+          (click)="removeLinkById(link)"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
 </div>
 
 <div

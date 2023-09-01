@@ -130,6 +130,40 @@ h2 i {
   cursor: pointer;
 }
 
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: var(--royal-purple);
+  border: 2px solid var(--coral);
+  color: var(--coral);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px; // You can adjust this
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 3px -3px rgba(0, 0, 0, 0.35);
+    background-color: var(--coral);
+    color: var(--royal-purple);
+    border: 2px solid var(--royal-purple);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    background-color: grey;
+    color: darkgrey;
+    cursor: not-allowed;
+  }
+}
+
 .floating-button {
   position: fixed;
   bottom: 20px;
@@ -229,5 +263,60 @@ h2 i {
 
 .closed {
   color: var(--coral);
-  margin: 2.5em 0;
+  margin: 2em 0;
+  border: 1px solid;
+  padding: 1em 0;
+  border-radius: 11px;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.link-container {
+  position: relative;
+}
+
+.remove-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(33, 33, 33);
+  color: white;
+  border-radius: 50%;
+  border: 1px solid white;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disable-click {
+  pointer-events: none;
+  cursor: default;
+}
+
+.fa-times {
+  font-size: 12px;
 }

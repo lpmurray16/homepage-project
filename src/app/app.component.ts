@@ -12,6 +12,7 @@ import {
 })
 export class AppComponent implements OnInit {
   modalOpen = false;
+  isDeleteMode = false;
   links: Observable<Link[]>;
   linkToAdd: Link = {
     section: '',
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit {
 
   constructor(private realtimeDb: RealtimeDatabaseService) {
     this.links = this.realtimeDb.getLinks();
+    console.log(
+      'Links: ',
+      this.links.subscribe((x) => console.log(x))
+    );
   }
 
   ngOnInit(): void {}
@@ -49,8 +54,20 @@ export class AppComponent implements OnInit {
     this.resetLinkToAdd();
   }
 
+  removeLinkById(link: Link): void {
+    console.log('Attempt to remove link with Id: ', link.id);
+    if (link.id) {
+      this.realtimeDb.removeLinkById(link);
+      console.log('Remove was called with link Id: ', link.id);
+    }
+  }
+
   toggleSection(section: string): void {
     this.isSectionOpen[section] = !this.isSectionOpen[section];
+  }
+
+  toggleDeleteMode() {
+    this.isDeleteMode = !this.isDeleteMode;
   }
 
   resetLinkToAdd() {

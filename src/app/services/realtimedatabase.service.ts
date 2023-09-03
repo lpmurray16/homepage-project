@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { AngularFireModule } from '@angular/fire/compat';
 
 export interface Link {
@@ -38,6 +38,21 @@ export class RealtimeDatabaseService {
             .filter((link) => link.id !== null)
         )
       );
+  }
+
+  getSectionsState(): Observable<any> {
+    return this.realtimeDb.object('sections').valueChanges();
+  }
+
+  toggleSectionState(sectionName: string) {
+    const sectionRef = this.realtimeDb.object(`sections/${sectionName}`);
+
+    sectionRef
+      .valueChanges()
+      .pipe(take(1))
+      .subscribe((currentValue) => {
+        sectionRef.set(!currentValue);
+      });
   }
 
   addLinkToDb(link: Link) {

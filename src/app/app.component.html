@@ -1,15 +1,15 @@
 <button class="remove-mode-bttn" (click)="toggleDeleteMode()">
-  {{ isDeleteMode ? "End Remove Mode" : "Remove Mode" }}
+  {{ isDeleteMode ? "Back" : "Remove" }}
 </button>
 
 <h2
-  (click)="toggleSection('favorites')"
   class="section-header"
-  [class.closed]="!isSectionOpen['favorites']"
+  (click)="toggleSectionState('favorites')"
+  [class.closed]="!sectionsState?.favorites"
 >
   Favorites<i class="fa-solid fa-star"></i>
 </h2>
-<div *ngIf="isSectionOpen['favorites']" class="section static">
+<div *ngIf="sectionsState?.favorites" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'favorites'">
       <div class="link-container">
@@ -35,13 +35,13 @@
 </div>
 
 <h2
-  (click)="toggleSection('others')"
   class="section-header"
-  [class.closed]="!isSectionOpen['others']"
+  (click)="toggleSectionState('others')"
+  [class.closed]="!sectionsState?.others"
 >
   Other<i class="fa-solid fa-grip"></i>
 </h2>
-<div *ngIf="isSectionOpen['others']" class="section static">
+<div *ngIf="sectionsState?.others" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'others'">
       <div class="link-container">
@@ -67,13 +67,13 @@
 </div>
 
 <h2
-  (click)="toggleSection('servers')"
   class="section-header"
-  [class.closed]="!isSectionOpen['servers']"
+  (click)="toggleSectionState('servers')"
+  [class.closed]="!sectionsState?.servers"
 >
   Servers<i class="fa-solid fa-server"></i>
 </h2>
-<div *ngIf="isSectionOpen['servers']" class="section static">
+<div *ngIf="sectionsState?.servers" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'servers'">
       <div class="link-container">
@@ -99,13 +99,13 @@
 </div>
 
 <h2
-  (click)="toggleSection('personal')"
   class="section-header"
-  [class.closed]="!isSectionOpen['personal']"
+  (click)="toggleSectionState('personal')"
+  [class.closed]="!sectionsState?.personal"
 >
   Personal<i class="fa-solid fa-grip"></i>
 </h2>
-<div *ngIf="isSectionOpen['personal']" class="section static">
+<div *ngIf="sectionsState?.personal" class="section static">
   <ng-container *ngFor="let link of links | async">
     <ng-container *ngIf="link.section === 'personal'">
       <div class="link-container">

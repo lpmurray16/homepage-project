@@ -226,6 +226,9 @@ button {
   border: 1px solid var(--coral);
   width: 50%;
   z-index: 2;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 }
 
 .close {
@@ -369,14 +372,18 @@ button {
   transform: translate(-50%, -50%);
   width: 48em;
   height: 48em;
-  background-image: radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0),
-    radial-gradient(circle 10px, #fff 100%, transparent 0);
+  background-image: radial-gradient(
+      circle 10px,
+      var(--royal-purple) 100%,
+      transparent 0
+    ),
+    radial-gradient(circle 10px, var(--coral) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--plum-web) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--royal-purple) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--plum-web) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--coral) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--plum-web) 100%, transparent 0),
+    radial-gradient(circle 10px, var(--coral) 100%, transparent 0);
   background-position: 0em -18em, 0em 18em, 18em 0em, -18em 0em, 13em -13em,
     -13em -13em, 13em 13em, -13em 13em;
   background-repeat: no-repeat;
@@ -386,7 +393,7 @@ button {
 }
 .loader::after {
   font-size: 1px;
-  background: #fff;
+  background: var(--royal-purple);
   animation: bounce 1s ease-in infinite;
 }
 

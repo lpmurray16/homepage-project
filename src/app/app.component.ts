@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   modalOpen = false;
   isDeleteMode = false;
   links: Observable<Link[]>;
+
   linkToAdd: Link = {
     section: '',
     url: '',
@@ -21,22 +22,18 @@ export class AppComponent implements OnInit {
     icon: '',
   };
 
-  isSectionOpen: { [key: string]: boolean } = {
-    favorites: true,
-    others: true,
-    servers: true,
-    personal: true,
-  };
+  sectionsState: any = {};
 
   constructor(private realtimeDb: RealtimeDatabaseService) {
     this.links = this.realtimeDb.getLinks();
-    console.log(
-      'Links: ',
-      this.links.subscribe((x) => console.log(x))
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.realtimeDb.getSectionsState().subscribe((data) => {
+      this.sectionsState = data;
+      console.log(this.sectionsState);
+    });
+  }
 
   ngOnDestroy() {}
 
@@ -54,16 +51,16 @@ export class AppComponent implements OnInit {
     this.resetLinkToAdd();
   }
 
+  toggleSectionState(sectionName: string) {
+    this.realtimeDb.toggleSectionState(sectionName);
+  }
+
   removeLinkById(link: Link): void {
     console.log('Attempt to remove link with Id: ', link.id);
     if (link.id) {
       this.realtimeDb.removeLinkById(link);
       console.log('Remove was called with link Id: ', link.id);
     }
-  }
-
-  toggleSection(section: string): void {
-    this.isSectionOpen[section] = !this.isSectionOpen[section];
   }
 
   toggleDeleteMode() {

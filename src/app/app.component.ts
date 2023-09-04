@@ -46,6 +46,9 @@ export class AppComponent implements OnInit {
     ) {
       alert('Please fill out all fields');
       return;
+    } else if (this.linkToAdd.url.indexOf('http') === -1) {
+      alert('Please enter a valid URL');
+      return;
     }
     this.realtimeDb.addLinkToDb(this.linkToAdd);
     this.resetLinkToAdd();

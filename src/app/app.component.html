@@ -32,6 +32,38 @@
 
 <h2
   class="section-header"
+  (click)="toggleSectionState('work')"
+  [class.closed]="!sectionsState?.work"
+>
+  Work<i class="fa-solid fa-fish"></i>
+</h2>
+<div *ngIf="sectionsState?.work" class="section static">
+  <ng-container *ngFor="let link of links | async">
+    <ng-container *ngIf="link.section === 'work'">
+      <div class="link-container">
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          class="favorite other"
+          [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
+          href="{{ link.url }}"
+        >
+          <div>{{ link.title }}<i class="{{ link.icon }}"></i></div>
+        </a>
+        <span
+          *ngIf="isDeleteMode"
+          class="remove-icon"
+          (click)="removeLinkById(link)"
+        >
+          <i class="fa fa-times"></i>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<h2
+  class="section-header"
   (click)="toggleSectionState('others')"
   [class.closed]="!sectionsState?.others"
 >
@@ -147,6 +179,7 @@
       <label for="section">Choose a section:</label>
       <select id="section" name="section" [(ngModel)]="linkToAdd.section">
         <option value="favorites">Favorites</option>
+        <option value="work">Work</option>
         <option value="others">Other</option>
         <option value="servers">Servers</option>
         <option value="personal">Personal</option>
@@ -183,7 +216,9 @@
           <i class="{{ linkToAdd.icon }}"></i>
         </span>
       </div>
-      <a class="link" href="https://fontawesome.com/search" target="_blank">Search for icons</a>
+      <a class="link" href="https://fontawesome.com/search" target="_blank"
+        >Search for icons</a
+      >
       <div class="submit">
         <a class="favorite other" (click)="addLink()">Add Link</a>
       </div>

@@ -2,7 +2,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyC_yc8Ae7r6rDt_PszQW2RZXL9Knv2WCqY',
+    apiKey: '${FIREBASE_API_KEY}',
     authDomain: 'just-links-40f9c.firebaseapp.com',
     databaseURL: 'https://just-links-40f9c-default-rtdb.firebaseio.com',
     projectId: 'just-links-40f9c',

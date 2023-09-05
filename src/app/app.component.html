@@ -12,7 +12,7 @@
         <a
           target="_blank"
           rel="noreferrer noopener"
-          class="favorite"
+          class="favorite other"
           [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
           href="{{ link.url }}"
         >
@@ -108,7 +108,7 @@
         <a
           target="_blank"
           rel="noreferrer noopener"
-          class="favorite"
+          class="favorite other"
           [ngClass]="{ shake: isDeleteMode, 'disable-click': isDeleteMode }"
           href="{{ link.url }}"
         >
@@ -135,9 +135,10 @@
   <i class="fa-solid fa-plus"></i>
 </div>
 
-<button class="remove-mode-bttn" (click)="toggleDeleteMode()">
-  {{ isDeleteMode ? "Back" : "Remove" }}
-</button>
+<div class="floating-button left-fixed" (click)="toggleDeleteMode()">
+  <i *ngIf="isDeleteMode" class="fa-solid fa-xmark"></i>
+  <i *ngIf="!isDeleteMode" class="fa-solid fa-trash"></i>
+</div>
 
 <div id="modal" class="modal" [class.open]="modalOpen" #myModal>
   <div class="modal-content" #myModal>
@@ -170,13 +171,19 @@
       />
 
       <label for="icon">Icon:</label>
-      <input
-        type="text"
-        id="icon"
-        name="icon"
-        placeholder="Enter FontAwesome class, e.g., fa-solid fa-plus"
-        [(ngModel)]="linkToAdd.icon"
-      />
+      <div class="icon-wrapper">
+        <input
+          type="text"
+          id="icon"
+          name="icon"
+          placeholder="Enter FontAwesome class, e.g., fa-solid fa-plus"
+          [(ngModel)]="linkToAdd.icon"
+        />
+        <span class="favorite other">
+          <i class="{{ linkToAdd.icon }}"></i>
+        </span>
+      </div>
+      <a class="link" href="https://fontawesome.com/search" target="_blank">Search for icons</a>
       <div class="submit">
         <a class="favorite other" (click)="addLink()">Add Link</a>
       </div>

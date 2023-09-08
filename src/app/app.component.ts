@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.realtimeDb.getSectionsState().subscribe((data) => {
       this.sectionsState = data;
-      console.log(this.sectionsState);
     });
   }
 

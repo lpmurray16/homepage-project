@@ -341,6 +341,11 @@ h2.section-header:not(.closed):hover {
   color: var(--coral);
 }
 
+h2.section-header:not(.closed):first-of-type {
+  color: var(--coral);
+  margin-top: 20px;
+}
+
 .closed {
   color: var(--coral);
   margin: 2em 0;

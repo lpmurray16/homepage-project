@@ -14,6 +14,13 @@ export class AppComponent implements OnInit {
   modalOpen = false;
   isDeleteMode = false;
   links: Observable<Link[]>;
+  dayName: string;
+  dayNumber: number;
+  month: string;
+  hours: number;
+  minutes: string;
+  seconds: string;
+  amOrPm: string;
 
   linkToAdd: Link = {
     section: '',
@@ -32,6 +39,7 @@ export class AppComponent implements OnInit {
     this.realtimeDb.getSectionsState().subscribe((data) => {
       this.sectionsState = data;
     });
+    this.getCurrentTimeAndDate();
   }
 
   ngOnDestroy() {}
@@ -84,5 +92,25 @@ export class AppComponent implements OnInit {
 
   closeModal() {
     this.modalOpen = false;
+  }
+
+  getCurrentTimeAndDate() {
+    setInterval(() => {
+      const date = new Date();
+      this.dayName = date.toLocaleString('default', { weekday: 'long' });
+      this.dayNumber = date.getDate();
+      this.month = date.toLocaleString('default', { month: 'long' });
+      this.hours =
+        date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+      this.minutes =
+        date.getMinutes() < 10
+          ? '0' + date.getMinutes().toString()
+          : date.getMinutes().toString();
+      this.seconds =
+        date.getSeconds() < 10
+          ? '0' + date.getSeconds().toString()
+          : date.getSeconds().toString();
+      this.amOrPm = date.getHours() >= 12 ? 'PM' : 'AM';
+    }, 1000);
   }
 }

@@ -74,6 +74,7 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  min-height: 340px;
 
   @media screen and (max-width: 768px) {
     padding: 20px 5px;

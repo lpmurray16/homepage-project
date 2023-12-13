@@ -14,6 +14,14 @@ export class AppComponent implements OnInit {
   modalOpen = false;
   isDeleteMode = false;
   links: Observable<Link[]>;
+
+  favoriteLinks: Link[] = [];
+  workLinks: Link[] = [];
+  otherLinks: Link[] = [];
+  serverLinks: Link[] = [];
+  personalLinks: Link[] = [];
+  toolLinks: Link[] = [];
+
   dayName: string;
   dayNumber: number;
   month: string;
@@ -33,6 +41,18 @@ export class AppComponent implements OnInit {
 
   constructor(private realtimeDb: RealtimeDatabaseService) {
     this.links = this.realtimeDb.getLinks();
+    this.separateLinksBySection();
+  }
+
+  separateLinksBySection() {
+    this.links.subscribe((links) => {
+      this.favoriteLinks = links.filter((link) => link.section === 'favorites');
+      this.workLinks = links.filter((link) => link.section === 'work');
+      this.otherLinks = links.filter((link) => link.section === 'others');
+      this.serverLinks = links.filter((link) => link.section === 'servers');
+      this.personalLinks = links.filter((link) => link.section === 'personal');
+      this.toolLinks = links.filter((link) => link.section === 'tools');
+    });
   }
 
   ngOnInit(): void {
@@ -84,6 +104,8 @@ export class AppComponent implements OnInit {
       title: '',
       icon: '',
     };
+
+    this.closeModal();
   }
 
   openModal() {

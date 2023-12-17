@@ -27,24 +27,24 @@
   background-color: $salmon;
   border-bottom: 3px solid $off-black;
 
-    &.favorites {
-        background-color: $greenish;
-    }
-    &.work {
-        background-color: $light-blue;
-    }
-    &.others {
-        background-color: $coral;
-    }
-    &.servers {
-        background-color: $lavender;
-    }
-    &.personal {
-        background-color: $off-teal;
-    }
-    &.tools {
-        background-color: $light-blue;
-    }
+  &.favorites {
+    background-color: $greenish;
+  }
+  &.work {
+    background-color: $light-blue;
+  }
+  &.others {
+    background-color: $coral;
+  }
+  &.servers {
+    background-color: $lavender;
+  }
+  &.personal {
+    background-color: $off-teal;
+  }
+  &.tools {
+    background-color: $light-blue;
+  }
 }
 .header.closedSection {
   border-bottom: 0px solid $off-black;
@@ -94,12 +94,12 @@
 }
 
 .floating-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: $coral;
-    border: 3px solid $off-black;
-    box-shadow: 3px 3px 0px $off-black;
-    padding: 10px;
-    cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $coral;
+  border: 3px solid $off-black;
+  box-shadow: 3px 3px 0px $off-black;
+  padding: 10px;
+  cursor: pointer;
 }

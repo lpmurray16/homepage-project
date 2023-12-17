@@ -1,7 +1,7 @@
 <div class="entire-app-container">
   
   <div class="theme-switcher-container">
-    <select [(ngModel)]="theme" class="theme-switcher">
+    <select [(ngModel)]="theme" (ngModelChange)="setThemeInLocalStorage()" class="theme-switcher">
       <option value="funky">Funky</option>
       <option value="neo">Neo</option>
     </select>

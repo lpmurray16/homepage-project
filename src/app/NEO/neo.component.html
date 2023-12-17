@@ -1,7 +1,158 @@
 <div class="neo-theme-wrapper">
-    <h1 style="text-align: center">Welcome, Logan!</h1>
-  <div class="clock">
-    <div>{{ dayName }}, {{ month }} {{ dayNumber }}</div>
-    <div>{{ hours }}:{{ minutes }}:{{ seconds }} {{ amOrPm }}</div>
+  <div class="nb-container">
+    <h1 class="text-center mt-1">Welcome, Logan!</h1>
+    <div
+      class="flex-container flex-column justify-center align-items-center my-1"
+    >
+      <div>{{ dayName }}, {{ month }} {{ dayNumber }}</div>
+      <div>{{ hours }}:{{ minutes }}:{{ seconds }} {{ amOrPm }}</div>
+    </div>
+  </div>
+  <!--FAVORITES-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header favorites"
+      [class.closedSection]="!sectionsState?.favorites"
+      (click)="toggleSectionState('favorites')"
+    >
+      Favorites
+      <span class="drawer-icon" [class.closed]="!sectionsState?.favorites"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.favorites"
+    >
+      <p *ngFor="let link of favoriteLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+  <!--PERSONAL-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header personal"
+      [class.closedSection]="!sectionsState?.personal"
+      (click)="toggleSectionState('personal')"
+    >
+      Personal
+      <span class="drawer-icon" [class.closed]="!sectionsState?.personal"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.personal"
+    >
+      <p *ngFor="let link of personalLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+  <!--WORK-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header work"
+      [class.closedSection]="!sectionsState?.work"
+      (click)="toggleSectionState('work')"
+    >
+      Work
+      <span class="drawer-icon" [class.closed]="!sectionsState?.work"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.work"
+    >
+      <p *ngFor="let link of workLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+  <!--OTHER-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header others"
+      [class.closedSection]="!sectionsState?.others"
+      (click)="toggleSectionState('others')"
+    >
+      Others
+      <span class="drawer-icon" [class.closed]="!sectionsState?.others"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.others"
+    >
+      <p *ngFor="let link of otherLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+  <!--SERVERS-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header servers"
+      [class.closedSection]="!sectionsState?.servers"
+      (click)="toggleSectionState('servers')"
+    >
+      Servers
+      <span class="drawer-icon" [class.closed]="!sectionsState?.servers"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.servers"
+    >
+      <p *ngFor="let link of serverLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+  <!--TOOLS-->
+  <div class="nb-container">
+    <h2
+      class="flex-container justify-space-between clickable header tools"
+      [class.closedSection]="!sectionsState?.tools"
+      (click)="toggleSectionState('tools')"
+    >
+      Tools
+      <span class="drawer-icon" [class.closed]="!sectionsState?.tools"
+        ><i class="fa-solid fa-chevron-down"></i
+      ></span>
+    </h2>
+    <div
+      class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+      *ngIf="sectionsState?.tools"
+    >
+      <p *ngFor="let link of toolLinks" class="list-item">
+        <a href="{{ link.url }}" target="_blank"
+          >{{ link.title }} <i class="{{ link.icon }}"></i
+        ></a>
+      </p>
+    </div>
+  </div>
+
+  <div
+    id="floating-button"
+    (click)="openModal()"
+    class="floating-button"
+    #openModalButton
+  >
+    <i class="fa-solid fa-plus"></i>
   </div>
 </div>

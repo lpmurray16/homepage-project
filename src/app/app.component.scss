@@ -3,14 +3,13 @@
   position: absolute;
   top: 15px;
   right: 20px;
-  font-family: $nunito;
+  font-family: $lexend;
   & .theme-switcher {
     font-size: 1.5rem;
     background-color: $coral;
     color: rgb(0, 0, 0);
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
     border: 2px solid black;
     & option {
         cursor: pointer;

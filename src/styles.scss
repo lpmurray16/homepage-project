@@ -2,3 +2,26 @@
 @import "./variables";
 @import "./overrides";
 @import "./loader";
+
+.clickable {
+  cursor: pointer;
+}
+.mb-1 {
+    margin-bottom: 1rem;
+}
+.my-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.mt-1 {
+    margin-top: 1rem;
+}
+.mx-1 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+

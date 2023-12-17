@@ -1,0 +1,50 @@
+// Flex Container Properties
+.flex-container {
+    display: flex;
+
+    &.flex-wrap { flex-wrap: wrap; }
+    
+    &.flex-row { flex-direction: row; }
+    &.flex-row-reverse { flex-direction: row-reverse; }
+    &.flex-column { flex-direction: column; }
+    &.flex-column-reverse { flex-direction: column-reverse; }
+  
+    &.justify-start { justify-content: flex-start; }
+    &.justify-end { justify-content: flex-end; }
+    &.justify-center { justify-content: center; }
+    &.justify-space-between { justify-content: space-between; }
+    &.justify-space-around { justify-content: space-around; }
+    &.justify-space-evenly { justify-content: space-evenly; }
+  
+    &.align-items-start { align-items: flex-start; }
+    &.align-items-end { align-items: flex-end; }
+    &.align-items-center { align-items: center; }
+    &.align-items-stretch { align-items: stretch; }
+    &.align-items-baseline { align-items: baseline; }
+  
+    &.align-content-start { align-content: flex-start; }
+    &.align-content-end { align-content: flex-end; }
+    &.align-content-center { align-content: center; }
+    &.align-content-space-between { align-content: space-between; }
+    &.align-content-space-around { align-content: space-around; }
+    &.align-content-stretch { align-content: stretch; }
+
+    &.gap-1 { gap: 1rem; }
+  }
+  
+  // Flex Item Properties
+  .flex-item {
+    &.flex-grow { flex-grow: 1; }
+    &.flex-shrink { flex-shrink: 1; }
+    &.flex-basis-auto { flex-basis: auto; }
+  
+    &.align-self-auto { align-self: auto; }
+    &.align-self-start { align-self: flex-start; }
+    &.align-self-end { align-self: flex-end; }
+    &.align-self-center { align-self: center; }
+    &.align-self-baseline { align-self: baseline; }
+    &.align-self-stretch { align-self: stretch; }
+    
+    // You can also add classes for order, flex-grow, flex-shrink, etc.
+  }
+  

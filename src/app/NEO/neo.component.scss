@@ -1,7 +1,105 @@
 @import "../../variables";
+@import "../../flex";
 
 .neo-theme-wrapper {
-    font-family: $nunito;
-    background-color: $off-white;
-    color: $off-black;
+  font-family: $lexend;
+  background-color: $off-white;
+  color: $off-black;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.nb-container {
+  margin: 20px 10%;
+  box-shadow: 3px 3px 0px $off-black;
+  border: 3px solid $off-black;
+  background-color: $manila;
+  @media screen and (max-width: 768px) {
+    margin: 20px 5%;
+  }
+}
+
+.header {
+  padding: 1rem;
+  background-color: $salmon;
+  border-bottom: 3px solid $off-black;
+
+    &.favorites {
+        background-color: $greenish;
+    }
+    &.work {
+        background-color: $light-blue;
+    }
+    &.others {
+        background-color: $coral;
+    }
+    &.servers {
+        background-color: $lavender;
+    }
+    &.personal {
+        background-color: $off-teal;
+    }
+    &.tools {
+        background-color: $light-blue;
+    }
+}
+.header.closedSection {
+  border-bottom: 0px solid $off-black;
+
+  &.favorites {
+    background-color: $lavender;
+  }
+  &.work {
+    background-color: $greenish;
+  }
+  &.others {
+    background-color: $light-blue;
+  }
+  &.servers {
+    background-color: $off-teal;
+  }
+  &.personal {
+    background-color: $coral;
+  }
+  &.tools {
+    background-color: $salmon;
+  }
+}
+.drawer-icon {
+  transition: all 0.2s ease-in-out;
+}
+.drawer-icon.closed {
+  transform: rotate(90deg);
+}
+
+.list-item {
+  display: flex;
+  & a {
+    padding: 1rem;
+    background-color: $off-teal;
+    border: 3px solid $off-black;
+    box-shadow: 3px 3px 0px $off-black;
+    text-decoration: none;
+    color: $off-white;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: $off-white;
+      color: $off-black;
+      box-shadow: 0px 0px 0px $off-black;
+    }
+  }
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: $coral;
+    border: 3px solid $off-black;
+    box-shadow: 3px 3px 0px $off-black;
+    padding: 10px;
+    cursor: pointer;
 }

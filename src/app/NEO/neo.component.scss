@@ -4,6 +4,10 @@
 .neo-theme-wrapper {
   font-family: $lexend;
   background-color: $off-white;
+  // background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
+  background-image: url("../../assets/grid2.svg");
+  background-size: cover;
+  background-repeat: repeat;
   color: $off-black;
   min-height: 100vh;
   width: 100%;

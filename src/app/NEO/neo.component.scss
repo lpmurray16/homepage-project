@@ -3,8 +3,8 @@
 
 .neo-theme-wrapper {
   font-family: $lexend;
-  background-color: $off-white;
   // background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
+  background-color: $off-white;
   background-image: url("../../assets/grid2.svg");
   background-size: cover;
   background-repeat: repeat;
@@ -17,12 +17,53 @@
 }
 
 .nb-container {
-  margin: 20px 10%;
   box-shadow: 3px 3px 0px $off-black;
   border: 3px solid $off-black;
-  background-color: $manila;
-  @media screen and (max-width: 768px) {
-    margin: 20px 5%;
+
+
+  &.manilla-bg {
+    background-color: $manila;
+    width: 650px;
+    max-width: 100%;
+    margin: 10px auto 10px auto;
+  }
+
+  &.white-bg {
+    background-color: $white;
+    background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
+    flex-basis: 49%;
+    @media screen and (max-width: 1000px) {
+      flex-basis: 90%;
+    }
+  }
+}
+
+.sections-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 10px;
+}
+
+.nb-icon-apply {
+  text-shadow: -1px -1px 0 #000,  /* Top left shadow */
+  1px -1px 0 #000,  /* Top right shadow */
+ -1px  1px 0 #000,  /* Bottom left shadow */
+  1px  1px 0 #000,
+  3px 3px 0px #000;
+  &.lavendar {
+    color: $lavender;
+  }
+  &.salmon {
+    color: $salmon;
+  }
+  &.greenish {
+    color: $greenish;
+  }
+  &.light-blue {
+    color: $light-blue;
   }
 }
 
@@ -69,7 +110,7 @@
     background-color: $coral;
   }
   &.tools {
-    background-color: $salmon;
+    background-color: $lavender;
   }
 }
 .drawer-icon {

@@ -2,6 +2,8 @@
 @import "./variables";
 @import "./overrides";
 @import "./loader";
+@import "./flex";
+@import "./modal";
 
 .clickable {
   cursor: pointer;
@@ -19,6 +21,21 @@
 .mx-1 {
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.pt-1 {
+  padding-top: 1rem;
+}
+.pb-1 {
+  padding-bottom: 1rem;
+}
+.px-1 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .text-center {

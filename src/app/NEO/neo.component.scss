@@ -4,7 +4,7 @@
 .neo-theme-wrapper {
   font-family: $lexend;
   // background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
-  background-color: $off-white;
+  background-color: $jet;
   background-image: url("../../assets/grid2.svg");
   background-size: cover;
   background-repeat: repeat;
@@ -17,19 +17,19 @@
 }
 
 .nb-container {
-  box-shadow: 3px 3px 0px $off-black;
-  border: 3px solid $off-black;
+  box-shadow: 3px 3px 0px $royal-purple;
+  border: 3px solid $plum-web;
 
 
   &.manilla-bg {
-    background-color: $manila;
+    background-color: $coral;
     width: 650px;
     max-width: 100%;
-    margin: 10px auto 10px auto;
+    margin: 30px auto 10px auto;
   }
 
   &.white-bg {
-    background-color: $white;
+    background-color: $off-black;
     background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
     flex-basis: 49%;
     @media screen and (max-width: 1000px) {
@@ -44,7 +44,7 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  padding: 10px;
+  padding: 40px 60px;
 }
 
 .nb-icon-apply {
@@ -69,49 +69,12 @@
 
 .header {
   padding: 1rem;
-  background-color: $salmon;
+  background-color: $coral;
   border-bottom: 3px solid $off-black;
-
-  &.favorites {
-    background-color: $greenish;
-  }
-  &.work {
-    background-color: $light-blue;
-  }
-  &.others {
-    background-color: $coral;
-  }
-  &.servers {
-    background-color: $lavender;
-  }
-  &.personal {
-    background-color: $off-teal;
-  }
-  &.tools {
-    background-color: $light-blue;
-  }
 }
 .header.closedSection {
   border-bottom: 0px solid $off-black;
-
-  &.favorites {
-    background-color: $lavender;
-  }
-  &.work {
-    background-color: $greenish;
-  }
-  &.others {
-    background-color: $light-blue;
-  }
-  &.servers {
-    background-color: $off-teal;
-  }
-  &.personal {
-    background-color: $coral;
-  }
-  &.tools {
-    background-color: $lavender;
-  }
+  background-color: $light-blue;
 }
 .drawer-icon {
   transition: all 0.2s ease-in-out;
@@ -124,14 +87,14 @@
   display: flex;
   & a {
     padding: 1rem;
-    background-color: $off-teal;
-    border: 3px solid $off-black;
-    box-shadow: 3px 3px 0px $off-black;
+    background-color: $lavender;
+    border: 3px solid $royal-purple;
+    box-shadow: 3px 3px 0px $plum-web;
     text-decoration: none;
-    color: $off-white;
+    color: $jet;
     transition: all 0.2s ease-in-out;
     &:hover {
-      background-color: $off-white;
+      background-color: $light-blue;
       color: $off-black;
       box-shadow: 0px 0px 0px $off-black;
     }

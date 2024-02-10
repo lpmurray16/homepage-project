@@ -17,12 +17,11 @@
 }
 
 .nb-container {
-  box-shadow: 3px 3px 0px $royal-purple;
-  border: 3px solid $plum-web;
-
+  box-shadow: 4px 4px 0px $black;
+  border: 3px solid $coral;
 
   &.manilla-bg {
-    background-color: $coral;
+    background-color: $orange;
     width: 650px;
     max-width: 100%;
     margin: 30px auto 10px auto;
@@ -48,11 +47,9 @@
 }
 
 .nb-icon-apply {
-  text-shadow: -1px -1px 0 #000,  /* Top left shadow */
-  1px -1px 0 #000,  /* Top right shadow */
- -1px  1px 0 #000,  /* Bottom left shadow */
-  1px  1px 0 #000,
-  3px 3px 0px #000;
+  text-shadow: -1px -1px 0 #000, /* Top left shadow */ 1px -1px 0 #000,
+    /* Top right shadow */ -1px 1px 0 #000,
+    /* Bottom left shadow */ 1px 1px 0 #000, 3px 3px 0px #000;
   &.lavendar {
     color: $lavender;
   }
@@ -69,7 +66,7 @@
 
 .header {
   padding: 1rem;
-  background-color: $coral;
+  background-color: $orange;
   border-bottom: 3px solid $off-black;
 }
 .header.closedSection {
@@ -87,9 +84,9 @@
   display: flex;
   & a {
     padding: 1rem;
-    background-color: $lavender;
-    border: 3px solid $royal-purple;
-    box-shadow: 3px 3px 0px $plum-web;
+    background-color: $orange;
+    border: 3px solid $coral;
+    box-shadow: 3px 3px 0px $black;
     text-decoration: none;
     color: $jet;
     transition: all 0.2s ease-in-out;
@@ -105,7 +102,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: $coral;
+  background-color: $orange;
   border: 3px solid $off-black;
   box-shadow: 3px 3px 0px $off-black;
   padding: 10px;

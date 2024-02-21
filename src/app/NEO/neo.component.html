@@ -14,20 +14,13 @@
   <div class="sections-wrapper">
     <!--FAVORITES-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header favorites"
-        [class.closedSection]="!sectionsState?.favorites"
-        (click)="toggleSectionState('favorites')"
-      >
+      <h2 class="flex-container header favorites">
         <span
           >Favorites <i class="fa-solid fa-heart nb-icon-apply salmon"></i
         ></span>
-        <span class="drawer-icon" [class.closed]="!sectionsState?.favorites"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
       </h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.favorites"
       >
         <p *ngFor="let link of favoriteLinks" class="list-item">
@@ -39,18 +32,9 @@
     </div>
     <!--PERSONAL-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header personal"
-        [class.closedSection]="!sectionsState?.personal"
-        (click)="toggleSectionState('personal')"
-      >
-        Personal
-        <span class="drawer-icon" [class.closed]="!sectionsState?.personal"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
-      </h2>
+      <h2 class="flex-container header personal">Personal</h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.personal"
       >
         <p *ngFor="let link of personalLinks" class="list-item">
@@ -62,18 +46,9 @@
     </div>
     <!--WORK-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header work"
-        [class.closedSection]="!sectionsState?.work"
-        (click)="toggleSectionState('work')"
-      >
-        Work
-        <span class="drawer-icon" [class.closed]="!sectionsState?.work"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
-      </h2>
+      <h2 class="flex-container header work">Work</h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.work"
       >
         <p *ngFor="let link of workLinks" class="list-item">
@@ -85,18 +60,9 @@
     </div>
     <!--OTHER-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header others"
-        [class.closedSection]="!sectionsState?.others"
-        (click)="toggleSectionState('others')"
-      >
-        Others
-        <span class="drawer-icon" [class.closed]="!sectionsState?.others"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
-      </h2>
+      <h2 class="flex-container header others">Others</h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.others"
       >
         <p *ngFor="let link of otherLinks" class="list-item">
@@ -108,18 +74,9 @@
     </div>
     <!--SERVERS-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header servers"
-        [class.closedSection]="!sectionsState?.servers"
-        (click)="toggleSectionState('servers')"
-      >
-        Servers
-        <span class="drawer-icon" [class.closed]="!sectionsState?.servers"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
-      </h2>
+      <h2 class="flex-container header servers">Servers</h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.servers"
       >
         <p *ngFor="let link of serverLinks" class="list-item">
@@ -131,18 +88,9 @@
     </div>
     <!--TOOLS-->
     <div class="nb-container white-bg">
-      <h2
-        class="flex-container justify-space-between clickable header tools"
-        [class.closedSection]="!sectionsState?.tools"
-        (click)="toggleSectionState('tools')"
-      >
-        Tools
-        <span class="drawer-icon" [class.closed]="!sectionsState?.tools"
-          ><i class="fa-solid fa-chevron-down"></i
-        ></span>
-      </h2>
+      <h2 class="flex-container header tools">Tools</h2>
       <div
-        class="link-list flex-container justify-center gap-1 flex-wrap my-1 mx-1"
+        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.tools"
       >
         <p *ngFor="let link of toolLinks" class="list-item">

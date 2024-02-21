@@ -17,8 +17,8 @@
 }
 
 .nb-container {
-  box-shadow: 4px 4px 0px $black;
-  border: 3px solid $coral;
+  box-shadow: 4px 4px 4px $black;
+  border-radius: 10px;
 
   &.manilla-bg {
     background-color: $orange;
@@ -28,7 +28,7 @@
   }
 
   &.white-bg {
-    background-color: $off-black;
+    background-color: #3f3f3f;
     background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
     flex-basis: 49%;
     @media screen and (max-width: 1000px) {
@@ -42,7 +42,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 40px 60px;
 }
 
@@ -67,7 +67,9 @@
 .header {
   padding: 1rem;
   background-color: $orange;
-  border-bottom: 3px solid $off-black;
+  border-top: 5px solid lighten($orange, 10%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .header.closedSection {
   border-bottom: 0px solid $off-black;
@@ -90,6 +92,7 @@
     text-decoration: none;
     color: $jet;
     transition: all 0.2s ease-in-out;
+    border-radius: 5px;
     &:hover {
       background-color: $light-blue;
       color: $off-black;

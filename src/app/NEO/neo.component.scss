@@ -3,9 +3,8 @@
 
 .neo-theme-wrapper {
   font-family: $lexend;
-  // background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
   background-color: $jet;
-  background-image: url("../../assets/grid2.svg");
+  // background-image: url("../../assets/grid2.svg");
   background-size: cover;
   background-repeat: repeat;
   color: $off-black;
@@ -25,6 +24,9 @@
     width: 650px;
     max-width: 100%;
     margin: 30px auto 10px auto;
+    @media screen and (max-width: 1000px) {
+      width: 350px;
+    }
   }
 
   &.white-bg {
@@ -32,7 +34,7 @@
     background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
     flex-basis: 49%;
     @media screen and (max-width: 1000px) {
-      flex-basis: 90%;
+      flex-basis: 100%;
     }
   }
 }
@@ -44,6 +46,9 @@
   gap: 20px;
   justify-content: space-evenly;
   padding: 40px 60px;
+  @media screen and (max-width: 1000px) {
+    padding: 10px;
+  }
 }
 
 .nb-icon-apply {

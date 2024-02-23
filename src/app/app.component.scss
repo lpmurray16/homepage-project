@@ -1,9 +1,12 @@
 @import "../variables";
+
+
 .theme-switcher-container {
   position: absolute;
   top: 15px;
   right: 20px;
   font-family: $lexend;
+  
   & .theme-switcher {
     font-size: 1.5rem;
     background-color: $coral;
@@ -23,6 +26,10 @@
     }
   }
   @media screen and (max-width: 768px) {
-    top: 100px;
+    top: auto;
+    bottom: 20px;
+    right: 0;
+    left: 10px;
+    position: fixed;
   }
 }

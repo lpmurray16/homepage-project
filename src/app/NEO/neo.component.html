@@ -4,111 +4,105 @@
       <i class="fa-solid fa-star nb-icon-apply lavendar"></i> Welcome, Logan!
       <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish"></i>
     </h1>
-    <div
-      class="flex-container flex-column justify-center align-items-center my-1"
-    >
+    <div class="flex-container flex-column justify-center align-items-center my-1">
       <div>{{ dayName }}, {{ month }} {{ dayNumber }}</div>
       <div>{{ hours }}:{{ minutes }}:{{ seconds }} {{ amOrPm }}</div>
     </div>
   </div>
-  <div class="sections-wrapper">
+  <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode">
     <!--FAVORITES-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header favorites">
-        <span
-          >Favorites <i class="fa-solid fa-heart nb-icon-apply salmon"></i
-        ></span>
+        <span>Favorites <i class="fa-solid fa-heart nb-icon-apply salmon"></i></span>
       </h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.favorites"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+        *ngIf="sectionsState?.favorites">
         <p *ngFor="let link of favoriteLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
     <!--PERSONAL-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header personal">Personal</h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.personal"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+        *ngIf="sectionsState?.personal">
         <p *ngFor="let link of personalLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+        </p>
+      </div>
+    </div>
+    <!--GAMING-->
+    <div class="nb-container white-bg">
+      <h2 class="flex-container header gaming">Gaming</h2>
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
+        <p *ngFor="let link of gamingLinks" class="list-item">
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+        </p>
+      </div>
+    </div>
+    <!--STREAMING-->
+    <div class="nb-container white-bg">
+      <h2 class="flex-container header streaming">Streaming</h2>
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
+        <p *ngFor="let link of streamingLinks" class="list-item">
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
     <!--WORK-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header work">Work</h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.work"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1" *ngIf="sectionsState?.work">
         <p *ngFor="let link of workLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
     <!--OTHER-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header others">Others</h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.others"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+        *ngIf="sectionsState?.others">
         <p *ngFor="let link of otherLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
     <!--SERVERS-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header servers">Servers</h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.servers"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+        *ngIf="sectionsState?.servers">
         <p *ngFor="let link of serverLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
     <!--TOOLS-->
     <div class="nb-container white-bg">
       <h2 class="flex-container header tools">Tools</h2>
-      <div
-        class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-        *ngIf="sectionsState?.tools"
-      >
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1" *ngIf="sectionsState?.tools">
         <p *ngFor="let link of toolLinks" class="list-item">
-          <a href="{{ link.url }}" target="_blank"
-            >{{ link.title }} <i class="{{ link.icon }}"></i
-          ></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
     </div>
   </div>
 
-  <div
-    id="floating-button"
-    (click)="openModal()"
-    class="floating-button"
-    #openModalButton
-  >
+  <div id="floating-button" (click)="openModal()" class="floating-button" #openModalButton>
     <i class="fa-solid fa-plus"></i>
+  </div>
+  <div id="floating-button-left" (click)="toggleDeleteMode()" class="floating-button-left" #deleteModeToggle>
+    <i class="fa-solid fa-xmark"></i>
   </div>
 
   <div id="modal" class="modal neo" [class.open]="modalOpen" #myModal>
@@ -119,6 +113,8 @@
         <select id="section" name="section" [(ngModel)]="linkToAdd.section">
           <option value="favorites">Favorites</option>
           <option value="work">Work</option>
+          <option value="gaming">Gaming</option>
+          <option value="streaming">Streaming</option>
           <option value="others">Other</option>
           <option value="servers">Servers</option>
           <option value="personal">Personal</option>
@@ -126,42 +122,19 @@
         </select>
 
         <label for="url">URL:</label>
-        <input
-          type="text"
-          id="url"
-          name="url"
-          placeholder="Enter URL"
-          [(ngModel)]="linkToAdd.url"
-        />
+        <input type="text" id="url" name="url" placeholder="Enter URL" [(ngModel)]="linkToAdd.url" />
 
         <label for="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Enter title"
-          [(ngModel)]="linkToAdd.title"
-        />
+        <input type="text" id="title" name="title" placeholder="Enter title" [(ngModel)]="linkToAdd.title" />
 
         <label for="icon">Icon:</label>
         <div class="icon-wrapper">
-          <input
-            type="text"
-            id="icon"
-            name="icon"
-            placeholder="ex: fa-solid fa-plus"
-            [(ngModel)]="linkToAdd.icon"
-          />
+          <input type="text" id="icon" name="icon" placeholder="ex: fa-solid fa-plus" [(ngModel)]="linkToAdd.icon" />
           <span class="favorite other">
             <i class="{{ linkToAdd.icon }}"></i>
           </span>
         </div>
-        <a
-          class="link"
-          href="https://fontawesome.com/search?o=r&m=free"
-          target="_blank"
-          >Search for icons</a
-        >
+        <a class="link" href="https://fontawesome.com/search?o=r&m=free" target="_blank">Search for icons</a>
         <div class="submit">
           <a class="favorite other" (click)="addLink()">Add Link</a>
         </div>

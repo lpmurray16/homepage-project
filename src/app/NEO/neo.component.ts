@@ -19,6 +19,8 @@ export class NeoThemeComponent implements OnInit {
   
     favoriteLinks: Link[] = [];
     workLinks: Link[] = [];
+    gamingLinks: Link[] = [];
+    streamingLinks: Link[] = [];
     otherLinks: Link[] = [];
     serverLinks: Link[] = [];
     personalLinks: Link[] = [];
@@ -50,6 +52,8 @@ export class NeoThemeComponent implements OnInit {
       this.links.subscribe((links) => {
         this.favoriteLinks = links.filter((link) => link.section === 'favorites');
         this.workLinks = links.filter((link) => link.section === 'work');
+        this.gamingLinks = links.filter((link) => link.section === 'gaming');
+        this.streamingLinks = links.filter((link) => link.section === 'streaming');
         this.otherLinks = links.filter((link) => link.section === 'others');
         this.serverLinks = links.filter((link) => link.section === 'servers');
         this.personalLinks = links.filter((link) => link.section === 'personal');

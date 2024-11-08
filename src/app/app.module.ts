@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
-import { FunkyThemeModule } from "./FUNKY/funky.component";
 import { NeoThemeModule } from "./NEO/neo.component";
 
 @NgModule({
@@ -19,7 +18,6 @@ import { NeoThemeModule } from "./NEO/neo.component";
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         FormsModule,
-        FunkyThemeModule,
         NeoThemeModule
     ]
 })

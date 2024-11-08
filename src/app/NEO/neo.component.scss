@@ -1,10 +1,12 @@
 @import "../../variables";
 @import "../../flex";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 .neo-theme-wrapper {
-  font-family: $lexend;
-  background-color: $jet;
-  // background-image: url("../../assets/grid2.svg");
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  letter-spacing: 3px;
+  background-color: $black;
   background-size: cover;
   background-repeat: repeat;
   color: $off-black;
@@ -15,24 +17,38 @@
   justify-content: flex-start;
 }
 
+h2 {
+  text-transform: uppercase;
+}
+
 .nb-container {
-  box-shadow: 4px 4px 4px $black;
+  box-shadow: none;
   border-radius: 10px;
 
+  h1 {
+    font-size: 3rem;
+    @media screen and (max-width: 1000px) {
+      font-size: 2rem;
+    }
+  }
+
   &.manilla-bg {
-    background-color: $orange;
+    background-color: transparent;
+    color: $white;
     width: 650px;
     max-width: 100%;
     margin: 30px auto 10px auto;
+
     @media screen and (max-width: 1000px) {
       width: 350px;
     }
   }
 
   &.white-bg {
-    background-color: #3f3f3f;
+    background-color: transparent;
     background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
-    flex-basis: 49%;
+    flex-basis: 48%;
+
     @media screen and (max-width: 1000px) {
       flex-basis: 100%;
     }
@@ -46,24 +62,33 @@
   gap: 20px;
   justify-content: space-evenly;
   padding: 40px 60px;
+
   @media screen and (max-width: 1000px) {
     padding: 10px;
   }
 }
 
 .nb-icon-apply {
-  text-shadow: -1px -1px 0 #000, /* Top left shadow */ 1px -1px 0 #000,
-    /* Top right shadow */ -1px 1px 0 #000,
-    /* Bottom left shadow */ 1px 1px 0 #000, 3px 3px 0px #000;
+  text-shadow: -1px -1px 0 #000,
+    /* Top left shadow */
+    1px -1px 0 #000,
+    /* Top right shadow */
+    -1px 1px 0 #000,
+    /* Bottom left shadow */
+    1px 1px 0 #000, 3px 3px 0px #000;
+
   &.lavendar {
     color: $lavender;
   }
+
   &.salmon {
     color: $salmon;
   }
+
   &.greenish {
     color: $greenish;
   }
+
   &.light-blue {
     color: $light-blue;
   }
@@ -71,36 +96,44 @@
 
 .header {
   padding: 1rem;
-  background-color: $orange;
-  border-top: 5px solid lighten($orange, 10%);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  background-color: $black;
+  color: $white;
+  border-bottom: 2px solid $white;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
 }
+
 .header.closedSection {
   border-bottom: 0px solid $off-black;
   background-color: $light-blue;
 }
+
 .drawer-icon {
   transition: all 0.2s ease-in-out;
 }
+
 .drawer-icon.closed {
   transform: rotate(90deg);
 }
 
 .list-item {
   display: flex;
+
   & a {
     padding: 1rem;
-    background-color: $orange;
+    background-color: $black;
     border: 3px solid $coral;
-    box-shadow: 3px 3px 0px $black;
+    box-shadow: 3px 3px 8px $jet;
     text-decoration: none;
-    color: $jet;
+    color: $white;
     transition: all 0.2s ease-in-out;
     border-radius: 5px;
+
     &:hover {
-      background-color: $light-blue;
+      background-color: $coral;
       color: $off-black;
+      border: 3px solid $light-blue;
       box-shadow: 0px 0px 0px $off-black;
     }
   }
@@ -112,6 +145,7 @@
     color: $jet;
     border: 3px solid firebrick;
     box-shadow: 3px 3px 0px firebrick;
+
     &:hover {
       background-color: firebrick;
       color: $off-black;
@@ -125,19 +159,20 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: $orange;
+  background-color: $white;
   border: 3px solid $off-black;
-  box-shadow: 3px 3px 0px $off-black;
+  box-shadow: 3px 3px 8px $off-black;
   padding: 10px;
   cursor: pointer;
 }
+
 .floating-button-left {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background-color: $orange;
+  background-color: $white;
   border: 3px solid $off-black;
-  box-shadow: 3px 3px 0px $off-black;
+  box-shadow: 3px 3px 8px $off-black;
   padding: 10px;
   cursor: pointer;
 }

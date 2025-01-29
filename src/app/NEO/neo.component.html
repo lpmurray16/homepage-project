@@ -4,7 +4,7 @@
       <i class="fa-solid fa-star nb-icon-apply lavendar"></i> Welcome, Logan!
       <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish"></i>
     </h1>
-    <div class="flex-container flex-column justify-center align-items-center my-1">
+    <div class="time flex-container flex-column justify-center align-items-center my-1">
       <div>{{ dayName }}, {{ month }} {{ dayNumber }}</div>
       <div>{{ hours }}:{{ minutes }}:{{ seconds }} {{ amOrPm }}</div>
     </div>
@@ -18,7 +18,8 @@
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.favorites">
         <p *ngFor="let link of favoriteLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -29,7 +30,8 @@
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.personal">
         <p *ngFor="let link of personalLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -39,7 +41,19 @@
       <h2 class="flex-container header gaming">Gaming</h2>
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
         <p *ngFor="let link of gamingLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
+          <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+        </p>
+      </div>
+    </div>
+    <!--AI TOOLS-->
+    <div class="nb-container white-bg">
+      <h2 class="flex-container header ai-tools">AI Tools</h2>
+      <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
+        <p *ngFor="let link of aiToolLinks" class="list-item">
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -49,7 +63,8 @@
       <h2 class="flex-container header streaming">Streaming</h2>
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
         <p *ngFor="let link of streamingLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -59,7 +74,8 @@
       <h2 class="flex-container header work">Work</h2>
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1" *ngIf="sectionsState?.work">
         <p *ngFor="let link of workLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -70,7 +86,8 @@
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.others">
         <p *ngFor="let link of otherLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -81,7 +98,8 @@
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
         *ngIf="sectionsState?.servers">
         <p *ngFor="let link of serverLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -91,7 +109,8 @@
       <h2 class="flex-container header tools">Tools</h2>
       <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1" *ngIf="sectionsState?.tools">
         <p *ngFor="let link of toolLinks" class="list-item">
-          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i class="{{ link.icon }}"></i></a>
+          <a *ngIf="!isDeleteMode" href="{{ link.url }}" target="_blank">{{ link.title }} <i
+              class="{{ link.icon }}"></i></a>
           <a *ngIf="isDeleteMode" (click)="removeLinkById(link)">{{ link.title }} <i class="{{ link.icon }}"></i></a>
         </p>
       </div>
@@ -119,6 +138,7 @@
           <option value="servers">Servers</option>
           <option value="personal">Personal</option>
           <option value="tools">Tools</option>
+          <option value="ai-tools">AI Tools</option>
         </select>
 
         <label for="url">URL:</label>

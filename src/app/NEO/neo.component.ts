@@ -25,6 +25,7 @@ export class NeoThemeComponent implements OnInit {
     serverLinks: Link[] = [];
     personalLinks: Link[] = [];
     toolLinks: Link[] = [];
+    aiToolLinks: Link[] = [];
   
     dayName: string;
     dayNumber: number;
@@ -58,6 +59,7 @@ export class NeoThemeComponent implements OnInit {
         this.serverLinks = links.filter((link) => link.section === 'servers');
         this.personalLinks = links.filter((link) => link.section === 'personal');
         this.toolLinks = links.filter((link) => link.section === 'tools');
+        this.aiToolLinks = links.filter((link) => link.section === 'ai-tools');
       });
     }
   

@@ -6,9 +6,8 @@
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   letter-spacing: 3px;
+  background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
   background-color: $black;
-  background-size: cover;
-  background-repeat: repeat;
   color: $off-black;
   min-height: 100vh;
   width: 100%;
@@ -46,8 +45,7 @@ h2 {
 
   &.white-bg {
     background-color: transparent;
-    background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
-    flex-basis: 48%;
+    flex-basis: 32%;
 
     @media screen and (max-width: 1000px) {
       flex-basis: 100%;
@@ -93,10 +91,12 @@ h2 {
     color: $light-blue;
   }
 }
-
+.time {
+  background-color: $black;
+}
 .header {
   padding: 1rem;
-  background-color: $black;
+  background-color: transparent;
   color: $white;
   border-bottom: 2px solid $white;
   text-align: center;
@@ -139,12 +139,21 @@ h2 {
   }
 }
 
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
 .isDeleteMode {
   .list-item a {
     background-color: rgb(225, 70, 70);
     color: $jet;
     border: 3px solid firebrick;
     box-shadow: 3px 3px 0px firebrick;
+    animation: shake 0.5s infinite;
 
     &:hover {
       background-color: firebrick;

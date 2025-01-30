@@ -1,158 +1,185 @@
 @import "./variables";
 
+// Mixins
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin neo-box {
+  border: 3px solid $off-black;
+  box-shadow: 3px 3px 0 $off-black;
+}
+
+@mixin form-element-base {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 0.8em;
+}
+
+// Modal Base
 .modal {
   display: none;
   position: fixed;
-  left: 0;
-  top: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   overflow: auto;
   z-index: 1;
 
-  & a.link {
-    display: inline-flex;
-    margin: 15px 0;
+  &.open {
+    display: block;
   }
 
+  // Neo Theme Specific
   &.neo {
     background-color: rgba(0, 0, 0, 0.326);
-    & a.link {
+
+    .link {
       text-decoration: none;
       color: $light-blue;
       border-bottom: 2px solid $light-blue;
       transition: all 0.3s ease;
+
       &:hover {
         border-bottom: 2px dashed $off-black;
         color: $off-black;
       }
     }
   }
-}
-.open {
-  display: block;
+
+  .link {
+    display: inline-flex;
+    margin: 15px 0;
+  }
 }
 
+// Modal Content
 .modal-content {
-  .neo & {
-    background-color: $white;
-    background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
-    color: $coral;
-    border: 3px solid $off-black;
-    box-shadow: 3px 3px 0px $off-black;
-    font-family: $lexend;
-    font-size: 1.5em;
-    & label,
-    input,
-    select {
-      font-family: $lexend;
-      color: $off-black;
-      font-weight: bold;
-    }
-    @media screen and (max-width: 768px) {
-      font-size: 1em;
-    }
-  }
-  & label,
-  input,
-  select {
-    font-family: $press-start;
-    color: $coral;
-  }
   background-color: $jet;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid $coral;
   width: 50%;
   z-index: 2;
-  @media screen and (max-width: 768px) {
+
+  @include mobile {
     width: 80%;
+  }
+
+  // Neo Theme Styles
+  .neo & {
+    background: {
+      color: $white;
+      image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
+    }
+    color: $coral;
+    font: {
+      family: $lexend;
+      size: 1.5em;
+    }
+    @include neo-box;
+
+    @include mobile {
+      font-size: 1em;
+    }
+
+    label, input, select {
+      font-family: $lexend;
+      color: $off-black;
+      font-weight: bold;
+    }
+  }
+
+  // Form Elements
+  label {
+    display: block;
+    margin-top: 20px;
+    font-family: $press-start;
+    color: $coral;
+  }
+
+  select, input {
+    @include form-element-base;
+    border: 2px solid $coral;
+    border-radius: 4px;
+    background-color: $royal-purple;
+    font-family: $press-start;
+    color: $coral;
+
+    .neo & {
+      background-color: $white;
+      border-radius: 0;
+      @include neo-box;
+    }
+
+    &:focus {
+      border-color: $plum-web;
+
+      .neo & {
+        border: 1px solid $off-black;
+        box-shadow: 2px 2px 0 $off-black;
+      }
+    }
+  }
+
+  select option {
+    background-color: $royal-purple;
+    color: $coral;
+    font-size: 2em;
+    padding: 6px;
+
+    .neo & {
+      background-color: $white;
+      color: $off-black;
+      font: {
+        size: 1em;
+        family: $lexend;
+      }
+    }
   }
 }
 
+// Close Button
 .close {
-  .neo & {
-    color: $off-black;
-  }
   color: $coral;
   float: right;
   font-size: 40px;
   cursor: pointer;
+
+  .neo & {
+    color: $off-black;
+  }
 }
 
+// Form
 #link-form {
   margin-top: 3em;
 }
 
-.modal-content label {
-  display: block;
-  margin-top: 20px;
-}
-
-.modal-content select,
-.modal-content input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 2px solid $coral;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: $royal-purple;
-  font-size: 0.8em;
-
-  .neo & {
-    background-color: $white;
-    border-radius: 0px;
-    border: 2px solid $off-black;
-    box-shadow: 3px 3px 0px $off-black;
-  }
-}
-
-.modal-content select option {
-  background-color: $royal-purple;
-  color: $coral;
-  font-size: 2em;
-  padding: 6px;
-
-  .neo & {
-    background-color: $white;
-    color: $off-black;
-    font-size: 1em;
-    font-family: $lexend;
-  }
-}
-
-.modal-content select:hover,
-.modal-content input:hover,
-.modal-content select:focus,
-.modal-content input:focus {
-  border-color: $plum-web;
-  .neo & {
-    border-color: $off-black;
-    border: 1px solid $off-black;
-    box-shadow: 2px 2px 0px $off-black;
-  }
-}
-
+// Submit Button
 .submit {
   width: 200px;
   margin: 20px auto;
   text-align: center;
+
   .neo & a {
     color: $white;
-    border: 3px solid $off-black;
     background-color: $off-teal;
     padding: 10px;
-    border-radius: 0px;
-    box-shadow: 3px 3px 0px $off-black;
     cursor: pointer;
     transition: all 0.3s ease;
+    @include neo-box;
+
     &:hover {
-        box-shadow: 1px 1px 0px $off-black;
-        background-color: $white;
-        color: $off-teal;
+      box-shadow: 1px 1px 0 $off-black;
+      background-color: $white;
+      color: $off-teal;
     }
   }
 }

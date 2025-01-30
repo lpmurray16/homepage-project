@@ -1,148 +1,177 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Link, RealtimeDatabaseService } from '../services/realtimedatabase.service';
+
+interface TimeDate {
+  dayName: string;
+  dayNumber: number;
+  month: string;
+  hours: number;
+  minutes: string;
+  seconds: string;
+  amOrPm: string;
+}
+
+interface SectionMap {
+  [key: string]: Link[];
+}
 
 @Component({
   selector: 'neo-theme',
   templateUrl: './neo.component.html',
   styleUrls: ['./neo.component.scss'],
 })
-export class NeoThemeComponent implements OnInit {
-    modalOpen = false;
-    isDeleteMode = false;
-    links: Observable<Link[]>;
+export class NeoThemeComponent implements OnInit, OnDestroy {
+  modalOpen = false;
+  isDeleteMode = false;
+  links: Observable<Link[]>;
+  sectionsState: Record<string, boolean> = {};
   
-    favoriteLinks: Link[] = [];
-    workLinks: Link[] = [];
-    gamingLinks: Link[] = [];
-    streamingLinks: Link[] = [];
-    otherLinks: Link[] = [];
-    serverLinks: Link[] = [];
-    personalLinks: Link[] = [];
-    toolLinks: Link[] = [];
-    aiToolLinks: Link[] = [];
+  // Time and date properties
+  timeDate: TimeDate = {
+    dayName: '',
+    dayNumber: 0,
+    month: '',
+    hours: 0,
+    minutes: '00',
+    seconds: '00',
+    amOrPm: 'AM'
+  };
+
+  // Section links
+  sections: SectionMap = {
+    favorites: [],
+    work: [],
+    gaming: [],
+    streaming: [],
+    others: [],
+    servers: [],
+    personal: [],
+    tools: [],
+    'ai-tools': []
+  };
+
+  linkToAdd: Link = this.getEmptyLink();
   
-    dayName: string;
-    dayNumber: number;
-    month: string;
-    hours: number;
-    minutes: string;
-    seconds: string;
-    amOrPm: string;
-  
-    linkToAdd: Link = {
+  private subscriptions: Subscription[] = [];
+
+  constructor(private realtimeDb: RealtimeDatabaseService) {
+    this.links = this.realtimeDb.getLinks();
+    this.initializeLinkSubscription();
+  }
+
+  private getEmptyLink(): Link {
+    return {
       section: '',
       url: '',
       title: '',
-      icon: '',
+      icon: ''
     };
-  
-    sectionsState: any = {};
-  
-    constructor(private realtimeDb: RealtimeDatabaseService) {
-      this.links = this.realtimeDb.getLinks();
-      this.separateLinksBySection();
-    }
-  
-    separateLinksBySection() {
-      this.links.subscribe((links) => {
-        this.favoriteLinks = links.filter((link) => link.section === 'favorites');
-        this.workLinks = links.filter((link) => link.section === 'work');
-        this.gamingLinks = links.filter((link) => link.section === 'gaming');
-        this.streamingLinks = links.filter((link) => link.section === 'streaming');
-        this.otherLinks = links.filter((link) => link.section === 'others');
-        this.serverLinks = links.filter((link) => link.section === 'servers');
-        this.personalLinks = links.filter((link) => link.section === 'personal');
-        this.toolLinks = links.filter((link) => link.section === 'tools');
-        this.aiToolLinks = links.filter((link) => link.section === 'ai-tools');
+  }
+
+  private initializeLinkSubscription(): void {
+    const linkSub = this.links.subscribe((links) => {
+      Object.keys(this.sections).forEach(section => {
+        this.sections[section] = links.filter(link => 
+          link.section === (section === 'others' ? 'others' : section)
+        );
       });
+    });
+    this.subscriptions.push(linkSub);
+  }
+
+  ngOnInit(): void {
+    const sectionsSub = this.realtimeDb.getSectionsState().subscribe(data => {
+      this.sectionsState = data;
+    });
+    this.subscriptions.push(sectionsSub);
+
+    this.startTimeUpdate();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  addLink(): void {
+    if (!this.isValidLink()) {
+      return;
     }
-  
-    ngOnInit(): void {
-      this.realtimeDb.getSectionsState().subscribe((data) => {
-        this.sectionsState = data;
-      });
-      this.getCurrentTimeAndDate();
+    
+    this.realtimeDb.addLinkToDb(this.linkToAdd);
+    this.resetLinkToAdd();
+  }
+
+  private isValidLink(): boolean {
+    if (!this.linkToAdd.section || !this.linkToAdd.url || 
+        !this.linkToAdd.title || !this.linkToAdd.icon) {
+      alert('Please fill out all fields');
+      return false;
     }
-  
-    ngOnDestroy() {}
-  
-    addLink() {
-      if (
-        this.linkToAdd.section === '' ||
-        this.linkToAdd.url === '' ||
-        this.linkToAdd.title === '' ||
-        this.linkToAdd.icon === ''
-      ) {
-        alert('Please fill out all fields');
-        return;
-      } else if (this.linkToAdd.url.indexOf('http') === -1) {
-        alert('Please enter a valid URL');
-        return;
-      }
-      this.realtimeDb.addLinkToDb(this.linkToAdd);
-      this.resetLinkToAdd();
+    
+    if (!this.linkToAdd.url.includes('http')) {
+      alert('Please enter a valid URL');
+      return false;
     }
-  
-    toggleSectionState(sectionName: string) {
-      this.realtimeDb.toggleSectionState(sectionName);
+    
+    return true;
+  }
+
+  toggleSectionState(sectionName: string): void {
+    this.realtimeDb.toggleSectionState(sectionName);
+  }
+
+  removeLinkById(link: Link): void {
+    if (link.id) {
+      this.realtimeDb.removeLinkById(link);
     }
-  
-    removeLinkById(link: Link): void {
-      console.log('Attempt to remove link with Id: ', link.id);
-      if (link.id) {
-        this.realtimeDb.removeLinkById(link);
-        console.log('Remove was called with link Id: ', link.id);
-      }
-    }
-  
-    toggleDeleteMode() {
-      this.isDeleteMode = !this.isDeleteMode;
-    }
-  
-    resetLinkToAdd() {
-      this.linkToAdd = {
-        section: '',
-        url: '',
-        title: '',
-        icon: '',
-      };
-  
-      this.closeModal();
-    }
-  
-    openModal() {
-      this.modalOpen = true;
-    }
-  
-    closeModal() {
-      this.modalOpen = false;
-    }
-  
-    getCurrentTimeAndDate() {
-      setInterval(() => {
-        const date = new Date();
-        this.dayName = date.toLocaleString('default', { weekday: 'long' });
-        this.dayNumber = date.getDate();
-        this.month = date.toLocaleString('default', { month: 'long' });
-        this.hours =
-          date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
-        this.minutes =
-          date.getMinutes() < 10
-            ? '0' + date.getMinutes().toString()
-            : date.getMinutes().toString();
-        this.seconds =
-          date.getSeconds() < 10
-            ? '0' + date.getSeconds().toString()
-            : date.getSeconds().toString();
-        this.amOrPm = date.getHours() >= 12 ? 'PM' : 'AM';
-      }, 1000);
-    }
+  }
+
+  toggleDeleteMode(): void {
+    this.isDeleteMode = !this.isDeleteMode;
+  }
+
+  private resetLinkToAdd(): void {
+    this.linkToAdd = this.getEmptyLink();
+    this.closeModal();
+  }
+
+  openModal(): void {
+    this.modalOpen = true;
+  }
+
+  closeModal(): void {
+    this.modalOpen = false;
+  }
+
+  private startTimeUpdate(): void {
+    const timeSub = interval(1000).subscribe(() => {
+      const date = new Date();
+      this.updateTimeDate(date);
+    });
+    this.subscriptions.push(timeSub);
+  }
+
+  private updateTimeDate(date: Date): void {
+    this.timeDate = {
+      dayName: date.toLocaleString('default', { weekday: 'long' }),
+      dayNumber: date.getDate(),
+      month: date.toLocaleString('default', { month: 'long' }),
+      hours: date.getHours() > 12 ? date.getHours() - 12 : date.getHours(),
+      minutes: this.padNumber(date.getMinutes()),
+      seconds: this.padNumber(date.getSeconds()),
+      amOrPm: date.getHours() >= 12 ? 'PM' : 'AM'
+    };
+  }
+
+  private padNumber(num: number): string {
+    return num < 10 ? `0${num}` : num.toString();
+  }
 }
 
 @NgModule({

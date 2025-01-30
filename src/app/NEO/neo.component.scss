@@ -2,12 +2,50 @@
 @import "../../flex";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
+// Variables
+$border-radius: 10px;
+$mobile-breakpoint: 1000px;
+$shadow-black: #000;
+$button-padding: 10px;
+$container-gap: 20px;
+
+// Mixins
+@mixin mobile {
+  @media screen and (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin floating-button-base {
+  position: fixed;
+  bottom: 20px;
+  background-color: $white;
+  border: 3px solid $off-black;
+  box-shadow: 3px 3px 8px $off-black;
+  padding: $button-padding;
+  cursor: pointer;
+}
+
+@mixin link-base {
+  padding: 1rem;
+  background-color: $black;
+  border: 3px solid $coral;
+  box-shadow: 3px 3px 8px $jet;
+  text-decoration: none;
+  color: $white;
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+// Main Styles
 .neo-theme-wrapper {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   letter-spacing: 3px;
-  background-image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
-  background-color: $black;
+  background: {
+    image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
+    color: $black;
+  }
   color: $off-black;
   min-height: 100vh;
   width: 100%;
@@ -16,17 +54,30 @@
   justify-content: flex-start;
 }
 
+.orange-sq-btn {
+  box-shadow: 3px 3px 0px $black;
+  background-color: $coral;
+  color: $off-black;
+  border: 3px solid $black;
+  padding: $button-padding;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
 h2 {
   text-transform: uppercase;
 }
 
 .nb-container {
   box-shadow: none;
-  border-radius: 10px;
+  border-radius: $border-radius;
 
   h1 {
     font-size: 3rem;
-    @media screen and (max-width: 1000px) {
+    @include mobile {
       font-size: 2rem;
     }
   }
@@ -36,9 +87,9 @@ h2 {
     color: $white;
     width: 650px;
     max-width: 100%;
-    margin: 30px auto 10px auto;
+    margin: 30px auto 10px;
 
-    @media screen and (max-width: 1000px) {
+    @include mobile {
       width: 350px;
     }
   }
@@ -47,7 +98,7 @@ h2 {
     background-color: transparent;
     flex-basis: 32%;
 
-    @media screen and (max-width: 1000px) {
+    @include mobile {
       flex-basis: 100%;
     }
   }
@@ -55,45 +106,43 @@ h2 {
 
 .sections-wrapper {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-flow: row wrap;
+  gap: $container-gap;
   justify-content: space-evenly;
   padding: 40px 60px;
 
-  @media screen and (max-width: 1000px) {
+  @include mobile {
     padding: 10px;
   }
 }
 
 .nb-icon-apply {
-  text-shadow: -1px -1px 0 #000,
-    /* Top left shadow */
-    1px -1px 0 #000,
-    /* Top right shadow */
-    -1px 1px 0 #000,
-    /* Bottom left shadow */
-    1px 1px 0 #000, 3px 3px 0px #000;
+  $shadow-offset: 1px;
+  $shadow-spread: 3px;
+  
+  text-shadow: 
+    -$shadow-offset -$shadow-offset 0 $shadow-black,
+    $shadow-offset -$shadow-offset 0 $shadow-black,
+    -$shadow-offset $shadow-offset 0 $shadow-black,
+    $shadow-offset $shadow-offset 0 $shadow-black,
+    $shadow-spread $shadow-spread 0 $shadow-black;
 
-  &.lavendar {
-    color: $lavender;
-  }
-
-  &.salmon {
-    color: $salmon;
-  }
-
-  &.greenish {
-    color: $greenish;
-  }
-
-  &.light-blue {
-    color: $light-blue;
+  @each $color-name, $color-value in (
+    'lavendar': $lavender,
+    'salmon': $salmon,
+    'greenish': $greenish,
+    'light-blue': $light-blue
+  ) {
+    &.#{$color-name} {
+      color: $color-value;
+    }
   }
 }
+
 .time {
   background-color: $black;
 }
+
 .header {
   padding: 1rem;
   background-color: transparent;
@@ -102,86 +151,64 @@ h2 {
   text-align: center;
   width: 100%;
   justify-content: center;
-}
 
-.header.closedSection {
-  border-bottom: 0px solid $off-black;
-  background-color: $light-blue;
+  &.closedSection {
+    border-bottom: 0;
+    background-color: $light-blue;
+  }
 }
 
 .drawer-icon {
   transition: all 0.2s ease-in-out;
-}
-
-.drawer-icon.closed {
-  transform: rotate(90deg);
+  
+  &.closed {
+    transform: rotate(90deg);
+  }
 }
 
 .list-item {
   display: flex;
 
-  & a {
-    padding: 1rem;
-    background-color: $black;
-    border: 3px solid $coral;
-    box-shadow: 3px 3px 8px $jet;
-    text-decoration: none;
-    color: $white;
-    transition: all 0.2s ease-in-out;
-    border-radius: 5px;
+  a {
+    @include link-base;
 
     &:hover {
       background-color: $coral;
       color: $off-black;
       border: 3px solid $light-blue;
-      box-shadow: 0px 0px 0px $off-black;
+      box-shadow: 0 0 0 $off-black;
     }
   }
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
+  0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
 }
 
-.isDeleteMode {
-  .list-item a {
-    background-color: rgb(225, 70, 70);
-    color: $jet;
-    border: 3px solid firebrick;
-    box-shadow: 3px 3px 0px firebrick;
-    animation: shake 0.5s infinite;
+.isDeleteMode .list-item a {
+  background-color: rgb(225, 70, 70);
+  color: $jet;
+  border: 3px solid firebrick;
+  box-shadow: 3px 3px 0 firebrick;
+  animation: shake 0.5s infinite;
 
-    &:hover {
-      background-color: firebrick;
-      color: $off-black;
-      box-shadow: none;
-      cursor: crosshair;
-    }
+  &:hover {
+    background-color: firebrick;
+    color: $off-black;
+    box-shadow: none;
+    cursor: crosshair;
   }
 }
 
 .floating-button {
-  position: fixed;
-  bottom: 20px;
+  @include floating-button-base;
   right: 20px;
-  background-color: $white;
-  border: 3px solid $off-black;
-  box-shadow: 3px 3px 8px $off-black;
-  padding: 10px;
-  cursor: pointer;
 }
 
 .floating-button-left {
-  position: fixed;
-  bottom: 20px;
+  @include floating-button-base;
   left: 20px;
-  background-color: $white;
-  border: 3px solid $off-black;
-  box-shadow: 3px 3px 8px $off-black;
-  padding: 10px;
-  cursor: pointer;
 }

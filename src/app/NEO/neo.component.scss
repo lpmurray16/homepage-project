@@ -42,16 +42,87 @@ $container-gap: 20px;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   letter-spacing: 3px;
+
   background: {
     image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
     color: $black;
   }
+
   color: $off-black;
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.search-container {
+  margin: 10px auto;
+  max-width: 300px;
+  position: relative;
+
+  .search-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #666;
+    }
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .search-results-list {
+      .search-result-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+
+        i {
+          font-size: 14px;
+          width: 20px;
+          text-align: center;
+        }
+
+        span {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+.fa-bolt-lightning {
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ffd700;
+  }
 }
 
 .orange-sq-btn {
@@ -77,6 +148,7 @@ h2 {
 
   h1 {
     font-size: 3rem;
+
     @include mobile {
       font-size: 2rem;
     }
@@ -119,20 +191,18 @@ h2 {
 .nb-icon-apply {
   $shadow-offset: 1px;
   $shadow-spread: 3px;
-  
-  text-shadow: 
+
+  text-shadow:
     -$shadow-offset -$shadow-offset 0 $shadow-black,
     $shadow-offset -$shadow-offset 0 $shadow-black,
     -$shadow-offset $shadow-offset 0 $shadow-black,
     $shadow-offset $shadow-offset 0 $shadow-black,
     $shadow-spread $shadow-spread 0 $shadow-black;
 
-  @each $color-name, $color-value in (
-    'lavendar': $lavender,
+  @each $color-name, $color-value in ('lavendar': $lavender,
     'salmon': $salmon,
     'greenish': $greenish,
-    'light-blue': $light-blue
-  ) {
+    'light-blue': $light-blue ) {
     &.#{$color-name} {
       color: $color-value;
     }
@@ -160,7 +230,7 @@ h2 {
 
 .drawer-icon {
   transition: all 0.2s ease-in-out;
-  
+
   &.closed {
     transform: rotate(90deg);
   }
@@ -182,10 +252,23 @@ h2 {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
 }
 
 .isDeleteMode .list-item a {

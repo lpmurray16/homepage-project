@@ -3,9 +3,13 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Observable, Subscription, interval } from 'rxjs';
+import { Observable, Subject, Subscription, interval } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Link, RealtimeDatabaseService } from '../services/realtimedatabase.service';
+import {
+  Link,
+  RealtimeDatabaseService,
+} from '../services/realtimedatabase.service';
 
 interface TimeDate {
   dayName: string;
@@ -27,12 +31,16 @@ interface SectionMap {
   styleUrls: ['./neo.component.scss'],
 })
 export class NeoThemeComponent implements OnInit, OnDestroy {
+  searchTerm: string = '';
+  filteredLinks: Link[] = [];
+  private searchSubject = new Subject<string>();
+  isSearchVisible = false;
+
   modalOpen = false;
   isDeleteMode = false;
   links: Observable<Link[]>;
   sectionsState: Record<string, boolean> = {};
-  
-  // Time and date properties
+
   timeDate: TimeDate = {
     dayName: '',
     dayNumber: 0,
@@ -40,10 +48,9 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     hours: 0,
     minutes: '00',
     seconds: '00',
-    amOrPm: 'AM'
+    amOrPm: 'AM',
   };
 
-  // Section links
   sections: SectionMap = {
     favorites: [],
     work: [],
@@ -53,16 +60,16 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     servers: [],
     personal: [],
     tools: [],
-    'ai-tools': []
+    'ai-tools': [],
   };
 
   linkToAdd: Link = this.getEmptyLink();
-  
   private subscriptions: Subscription[] = [];
 
   constructor(private realtimeDb: RealtimeDatabaseService) {
     this.links = this.realtimeDb.getLinks();
     this.initializeLinkSubscription();
+    this.initializeSearchSubscription();
   }
 
   private getEmptyLink(): Link {
@@ -70,55 +77,91 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
       section: '',
       url: '',
       title: '',
-      icon: ''
+      icon: '',
     };
   }
 
   private initializeLinkSubscription(): void {
     const linkSub = this.links.subscribe((links) => {
-      Object.keys(this.sections).forEach(section => {
-        this.sections[section] = links.filter(link => 
-          link.section === (section === 'others' ? 'others' : section)
+      Object.keys(this.sections).forEach((section) => {
+        this.sections[section] = links.filter(
+          (link) => link.section === (section === 'others' ? 'others' : section)
         );
       });
     });
     this.subscriptions.push(linkSub);
   }
 
+  private initializeSearchSubscription(): void {
+    const searchSub = this.searchSubject
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe(() => {
+        this.filterLinks();
+      });
+    this.subscriptions.push(searchSub);
+  }
+
+  onSearchInput(event: any): void {
+    this.searchSubject.next(event.target.value);
+  }
+
+  filterLinks(): void {
+    if (!this.searchTerm) {
+      this.filteredLinks = [];
+      return;
+    }
+
+    const allLinks: Link[] = Object.values(this.sections).flat();
+    this.filteredLinks = allLinks.filter((link) =>
+      link.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  toggleSearch(): void {
+    this.isSearchVisible = !this.isSearchVisible;
+    if (!this.isSearchVisible) {
+      this.searchTerm = '';
+      this.filteredLinks = [];
+    }
+  }
+
   ngOnInit(): void {
-    const sectionsSub = this.realtimeDb.getSectionsState().subscribe(data => {
+    const sectionsSub = this.realtimeDb.getSectionsState().subscribe((data) => {
       this.sectionsState = data;
     });
     this.subscriptions.push(sectionsSub);
-
     this.startTimeUpdate();
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    this.searchSubject.complete();
   }
 
   addLink(): void {
     if (!this.isValidLink()) {
       return;
     }
-    
     this.realtimeDb.addLinkToDb(this.linkToAdd);
     this.resetLinkToAdd();
   }
 
   private isValidLink(): boolean {
-    if (!this.linkToAdd.section || !this.linkToAdd.url || 
-        !this.linkToAdd.title || !this.linkToAdd.icon) {
+    if (
+      !this.linkToAdd.section ||
+      !this.linkToAdd.url ||
+      !this.linkToAdd.title ||
+      !this.linkToAdd.icon
+    ) {
       alert('Please fill out all fields');
       return false;
     }
-    
+
     if (!this.linkToAdd.url.includes('http')) {
       alert('Please enter a valid URL');
       return false;
     }
-    
+
     return true;
   }
 
@@ -165,7 +208,7 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
       hours: date.getHours() > 12 ? date.getHours() - 12 : date.getHours(),
       minutes: this.padNumber(date.getMinutes()),
       seconds: this.padNumber(date.getSeconds()),
-      amOrPm: date.getHours() >= 12 ? 'PM' : 'AM'
+      amOrPm: date.getHours() >= 12 ? 'PM' : 'AM',
     };
   }
 

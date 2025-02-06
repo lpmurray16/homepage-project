@@ -4,8 +4,28 @@
     <h1 class="text-center mt-1">
       <i class="fa-solid fa-star nb-icon-apply lavendar"></i> 
       Welcome, Logan!
-      <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish"></i>
+      <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish" (click)="toggleSearch()"></i>
     </h1>
+    <div *ngIf="isSearchVisible" class="search-container">
+      <input 
+        type="text" 
+        placeholder="Search links..." 
+        class="search-input"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchInput($event)">
+      
+      <div class="search-results" *ngIf="searchTerm">
+        <div class="search-results-list">
+          <a *ngFor="let link of filteredLinks" 
+             [href]="link.url" 
+             target="_blank" 
+             class="search-result-item">
+            <i [class]="link.icon"></i>
+            <span>{{ link.title }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
     <time class="time flex-container flex-column justify-center align-items-center my-1">
       <div>{{ timeDate.dayName }}, {{ timeDate.month }} {{ timeDate.dayNumber }}</div>
       <div>{{ timeDate.hours }}:{{ timeDate.minutes }}:{{ timeDate.seconds }} {{ timeDate.amOrPm }}</div>

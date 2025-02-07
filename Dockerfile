@@ -12,8 +12,7 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-
-# Throw-away build stage to reduce size of final image
+# Throw-away build stage to reduce size of the final image
 FROM base AS build
 
 # Install packages needed to build node modules
@@ -27,19 +26,17 @@ RUN npm ci --include=dev
 # Copy application code
 COPY . .
 
-# Build application
-RUN npm run build
+# Build Angular application for production
+RUN npm run build --prod
 
-# Remove development dependencies
-RUN npm prune --omit=dev
+# Final stage for app image using nginx
+FROM nginx:alpine
 
+# Copy built Angular app to nginx's default static file directory
+COPY --from=build /app/dist/homepage-project /usr/share/nginx/html
 
-# Final stage for app image
-FROM base
+# Expose port 80 for HTTP traffic
+EXPOSE 80
 
-# Copy built application
-COPY --from=build /app /app
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+# Start nginx to serve the application
+CMD ["nginx", "-g", "daemon off;"]

@@ -28,7 +28,7 @@ RUN npm ci --include=dev
 COPY . .
 
 # Build application
-RUN ng build
+RUN npm run build
 
 # Remove development dependencies
 RUN npm prune --omit=dev

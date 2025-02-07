@@ -12,9 +12,15 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-# Install necessary tools and dependencies
+# Throw-away build stage to reduce size of the final image
+FROM base AS build
+
+# Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli@16.2.0
 
 # Install node modules
 COPY package-lock.json package.json ./
@@ -24,7 +30,7 @@ RUN npm ci
 COPY . .
 
 # Build Angular application for production
-RUN npm run build --configuration production
+RUN ng build --configuration production
 
 # Install http-server to serve the Angular app
 RUN npm install -g http-server

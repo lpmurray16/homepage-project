@@ -36,6 +36,8 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<string>();
   isSearchVisible = false;
 
+  private sectionOrder: string[] = ['favorites', 'personal', 'work', 'gaming', 'streaming', 'others', 'servers', 'tools', 'ai-tools'];
+
   modalOpen = false;
   isDeleteMode = false;
   links: Observable<Link[]>;
@@ -103,6 +105,12 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
 
   onSearchInput(event: any): void {
     this.searchSubject.next(event.target.value);
+  }
+
+  get orderedSections(): { key: string; value: Link[] }[] {
+    return Object.entries(this.sections)
+      .sort(([keyA], [keyB]) => this.sectionOrder.indexOf(keyA) - this.sectionOrder.indexOf(keyB))
+      .map(([key, value]) => ({ key, value }));
   }
 
   filterLinks(): void {

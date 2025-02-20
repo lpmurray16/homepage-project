@@ -34,10 +34,10 @@
 
   <!-- Links Sections -->
   <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode">
-    <div class="nb-container white-bg" *ngFor="let sectionEntry of sections | keyvalue">
+    <div class="nb-container white-bg" *ngFor="let sectionEntry of orderedSections">
       <div>
         <h2 class="flex-container header {{sectionEntry.key}}">
-          {{sectionEntry.key | titlecase}}
+          {{ sectionEntry.key | titlecase }}
         </h2>
         <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
           <p *ngFor="let link of sectionEntry.value" class="list-item">

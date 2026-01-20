@@ -11,6 +11,7 @@ import {
 })
 export class AddLinkModalComponent {
   @Input() isOpen = false;
+  @Input() sections: string[] = [];
   @Output() close = new EventEmitter<void>();
 
   linkToAdd: Link = this.getEmptyLink();

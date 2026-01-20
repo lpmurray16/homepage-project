@@ -5,15 +5,9 @@
       <div class="form-group">
         <label for="section">Choose a section:</label>
         <select id="section" name="section" [(ngModel)]="linkToAdd.section">
-          <option value="favorites">Favorites</option>
-          <option value="work">Work</option>
-          <option value="gaming">Gaming</option>
-          <option value="streaming">Streaming</option>
-          <option value="others">Others</option>
-          <option value="servers">Servers</option>
-          <option value="personal">Personal</option>
-          <option value="tools">Tools</option>
-          <option value="ai-tools">AI Tools</option>
+          <option *ngFor="let section of sections" [value]="section">
+            {{ section | titlecase }}
+          </option>
         </select>
       </div>
 

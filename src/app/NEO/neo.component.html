@@ -41,7 +41,7 @@
   </app-tools-tray>
 
   <!-- Add Link Modal -->
-  <app-add-link-modal [isOpen]="modalOpen" (close)="closeModal()"></app-add-link-modal>
+  <app-add-link-modal [isOpen]="modalOpen" [sections]="sectionKeys" (close)="closeModal()"></app-add-link-modal>
 
   <!-- Edit Link Modal -->
   <app-edit-link-modal [isOpen]="editModalOpen" [linkToEdit]="linkToEdit" [sections]="sectionKeys"

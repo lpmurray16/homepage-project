@@ -1,0 +1,108 @@
+@import "../../../../variables";
+
+$button-padding: 10px;
+
+.orange-sq-btn {
+  box-shadow: 3px 3px 0px $black;
+  background-color: $coral;
+  color: $off-black;
+  border: 3px solid $black;
+  padding: $button-padding;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  
+  &.danger-btn {
+    background-color: $salmon;
+    border-color: firebrick;
+    color: $white;
+    
+    &:hover {
+      background-color: firebrick;
+    }
+  }
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: $off-black;
+  font-family: $lexend;
+}
+
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.section-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: $white;
+  border: 2px solid $off-black;
+  box-shadow: 2px 2px 0 $off-black;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateX(-5px);
+    background-color: $salmon;
+    color: $white;
+    
+    .section-name {
+      color: $white;
+    }
+    
+    .text-danger {
+      color: $white;
+    }
+  }
+}
+
+.section-name {
+  font-family: $press-start;
+  font-size: 0.8rem;
+  color: $off-black;
+}
+
+.text-danger {
+  color: firebrick;
+}
+
+.confirmation-view {
+  text-align: center;
+  padding: 20px;
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-family: $press-start;
+  }
+  
+  p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .warning-text {
+    color: firebrick;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+}

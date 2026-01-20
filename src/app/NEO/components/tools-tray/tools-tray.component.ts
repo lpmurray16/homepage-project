@@ -13,6 +13,7 @@ export class ToolsTrayComponent {
   @Output() deleteMode = new EventEmitter<void>();
   @Output() editMode = new EventEmitter<void>();
   @Output() addSection = new EventEmitter<void>();
+  @Output() deleteSection = new EventEmitter<void>();
 
   isOpen = false;
 
@@ -42,6 +43,12 @@ export class ToolsTrayComponent {
 
   onAddSection(): void {
     this.addSection.emit();
+    this.isOpen = false;
+  }
+
+  onDeleteSection(): void {
+    console.log('ToolsTray: onDeleteSection emitted');
+    this.deleteSection.emit();
     this.isOpen = false;
   }
 }

@@ -37,7 +37,7 @@
   <!-- Tools Tray -->
   <app-tools-tray [isDeleteMode]="isDeleteMode" [isEditMode]="isEditMode" (addLink)="openModal()"
     (deleteMode)="toggleDeleteMode()" (editMode)="toggleEditMode()" (addSection)="promptAddSection()"
-    (reorderSections)="toggleReorderMode()">
+    (reorderSections)="toggleReorderMode()" (deleteSection)="promptDeleteSection()">
   </app-tools-tray>
 
   <!-- Add Link Modal -->
@@ -51,6 +51,11 @@
   <!-- Add Section Modal -->
   <app-add-section-modal [isOpen]="sectionModalOpen" [currentMaxOrder]="currentMaxOrder" (close)="closeSectionModal()">
   </app-add-section-modal>
+
+  <!-- Delete Section Modal -->
+  <app-delete-section-modal [isOpen]="deleteSectionModalOpen" [sections]="sectionKeys" [allLinks]="allLinks"
+    (close)="closeDeleteSectionModal()">
+  </app-delete-section-modal>
 
   <!-- Reorder Modal -->
   <app-reorder-modal [isOpen]="reorderModalOpen" [sections]="orderedSections" (close)="closeReorderModal()">

@@ -78,13 +78,25 @@ export class RealtimeDatabaseService {
     return this.realtimeDb.object(`links/${id}`).update(data);
   }
 
-  removeLinkById(link: Link): void {
+  removeLinkById(link: Link): Promise<void> {
     if (link.id) {
       const path = `links/${link.id}`;
-      this.realtimeDb
+      return this.realtimeDb
         .object(path)
-        .remove()
-        .catch((error) => console.log(error));
+        .remove();
     }
+    return Promise.resolve();
+  }
+
+  deleteSection(sectionName: string, allLinks: Link[]): Promise<void> {
+    const linksToDelete = allLinks.filter((l) => l.section === sectionName);
+    const deleteLinkPromises = linksToDelete.map((link) =>
+      this.removeLinkById(link)
+    );
+
+    return Promise.all(deleteLinkPromises)
+      .then(() => {
+        return this.realtimeDb.object(`config/sections/${sectionName}`).remove();
+      });
   }
 }

@@ -18,6 +18,7 @@ import { ToolsTrayComponent } from './components/tools-tray/tools-tray.component
 import { AddSectionModalComponent } from './components/add-section-modal/add-section-modal.component';
 import { ReorderModalComponent } from './components/reorder-modal/reorder-modal.component';
 import { EditLinkModalComponent } from './components/edit-link-modal/edit-link-modal.component';
+import { DeleteSectionModalComponent } from './components/delete-section-modal/delete-section-modal.component';
 
 interface SectionMap {
   [key: string]: Link[];
@@ -32,6 +33,7 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
   modalOpen = false;
   sectionModalOpen = false;
   reorderModalOpen = false;
+  deleteSectionModalOpen = false;
   isDeleteMode = false;
   isEditMode = false;
   editModalOpen = false;
@@ -129,6 +131,11 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     this.sectionModalOpen = true;
   }
 
+  promptDeleteSection(): void {
+    console.log('NeoTheme: promptDeleteSection called');
+    this.deleteSectionModalOpen = true;
+  }
+
   toggleReorderMode(): void {
     this.reorderModalOpen = true;
   }
@@ -191,6 +198,10 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     this.sectionModalOpen = false;
   }
 
+  closeDeleteSectionModal(): void {
+    this.deleteSectionModalOpen = false;
+  }
+
   get currentMaxOrder(): number {
     return this.orderedSections.reduce(
       (max, s) => Math.max(max, s.sortOrder),
@@ -220,6 +231,7 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     AddSectionModalComponent,
     ReorderModalComponent,
     EditLinkModalComponent,
+    DeleteSectionModalComponent,
   ],
   providers: [],
 })

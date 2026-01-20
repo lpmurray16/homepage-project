@@ -11,6 +11,11 @@ export interface Link {
   icon: string;
 }
 
+export interface SectionConfig {
+  isOpen: boolean;
+  sortOrder: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -35,28 +40,42 @@ export class RealtimeDatabaseService {
                 icon: data.icon ?? '',
               } as Link;
             })
-            .filter((link) => link.id !== null)
-        )
+            .filter((link) => link.id !== null),
+        ),
       );
   }
 
-  getSectionsState(): Observable<any> {
-    return this.realtimeDb.object('sections').valueChanges();
+  getSectionConfigs(): Observable<Record<string, SectionConfig>> {
+    return this.realtimeDb
+      .object<Record<string, SectionConfig>>('config/sections')
+      .valueChanges()
+      .pipe(map((config) => config || {}));
   }
 
-  toggleSectionState(sectionName: string) {
-    const sectionRef = this.realtimeDb.object(`sections/${sectionName}`);
+  setSectionConfig(sectionName: string, config: SectionConfig): Promise<void> {
+    return this.realtimeDb
+      .object(`config/sections/${sectionName}`)
+      .update(config);
+  }
 
-    sectionRef
-      .valueChanges()
-      .pipe(take(1))
-      .subscribe((currentValue) => {
-        sectionRef.set(!currentValue);
-      });
+  updateSectionSortOrders(updates: Record<string, number>): Promise<void> {
+    const updateObj: Record<string, number> = {};
+    Object.keys(updates).forEach((key) => {
+      updateObj[`config/sections/${key}/sortOrder`] = updates[key];
+    });
+    return this.realtimeDb.object('/').update(updateObj);
   }
 
   addLinkToDb(link: Link) {
     return this.realtimeDb.list<Link>('links').push(link);
+  }
+
+  updateLink(link: Link): Promise<void> {
+    if (!link.id) {
+      return Promise.reject('Link ID is missing');
+    }
+    const { id, ...data } = link;
+    return this.realtimeDb.object(`links/${id}`).update(data);
   }
 
   removeLinkById(link: Link): void {

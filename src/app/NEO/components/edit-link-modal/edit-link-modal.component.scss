@@ -1,0 +1,24 @@
+@import "../../../../variables";
+
+$button-padding: 10px;
+
+.orange-sq-btn {
+  box-shadow: 3px 3px 0px $black;
+  background-color: $coral;
+  color: $off-black;
+  border: 3px solid $black;
+  padding: $button-padding;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}

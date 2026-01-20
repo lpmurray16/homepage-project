@@ -1,0 +1,35 @@
+<div class="tools-tray-wrapper">
+  <!-- Menu Items -->
+  <div class="tray-menu" [class.open]="isOpen">
+    <button class="tray-item" (click)="onAddLink()" title="Add New Link">
+      <i class="fa-solid fa-plus"></i>
+      <span class="label">Add Link</span>
+    </button>
+
+    <button class="tray-item" (click)="onAddSection()" title="Add New Section">
+      <i class="fa-solid fa-folder-plus"></i>
+      <span class="label">Add Section</span>
+    </button>
+
+    <button class="tray-item" (click)="onReorderSections()" title="Reorder Sections">
+      <i class="fa-solid fa-arrow-down-up-across-line"></i>
+      <span class="label">Reorder</span>
+    </button>
+
+    <button class="tray-item edit-btn" [class.active]="isEditMode" (click)="onEditMode()" title="Toggle Edit Mode">
+      <i class="fa-solid fa-pen-to-square"></i>
+      <span class="label">{{ isEditMode ? 'Exit Edit' : 'Edit Mode' }}</span>
+    </button>
+
+    <button class="tray-item delete-btn" [class.active]="isDeleteMode" (click)="onDeleteMode()"
+      title="Toggle Delete Mode">
+      <i class="fa-solid fa-trash-can"></i>
+      <span class="label">{{ isDeleteMode ? 'Exit Delete' : 'Delete Mode' }}</span>
+    </button>
+  </div>
+
+  <!-- Main Floating Button -->
+  <button class="floating-btn bottom-right" (click)="toggleTray()" [class.open]="isOpen">
+    <i class="fa-solid" [class.fa-toolbox]="!isOpen" [class.fa-xmark]="isOpen"></i>
+  </button>
+</div>

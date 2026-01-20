@@ -1,0 +1,55 @@
+<div id="modal" class="modal neo" [class.open]="isOpen">
+  <div class="modal-content">
+    <button class="close orange-sq-btn" (click)="closeModal()">&times;</button>
+    <form id="link-form" (ngSubmit)="addLink()">
+      <div class="form-group">
+        <label for="section">Choose a section:</label>
+        <select id="section" name="section" [(ngModel)]="linkToAdd.section">
+          <option value="favorites">Favorites</option>
+          <option value="work">Work</option>
+          <option value="gaming">Gaming</option>
+          <option value="streaming">Streaming</option>
+          <option value="others">Others</option>
+          <option value="servers">Servers</option>
+          <option value="personal">Personal</option>
+          <option value="tools">Tools</option>
+          <option value="ai-tools">AI Tools</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" 
+               placeholder="Enter URL" 
+               [(ngModel)]="linkToAdd.url" 
+               required>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" 
+               placeholder="Enter title" 
+               [(ngModel)]="linkToAdd.title" 
+               required>
+      </div>
+
+      <div class="form-group">
+        <label for="icon">Icon:</label>
+        <div class="icon-wrapper">
+          <input type="text" id="icon" name="icon" 
+                 placeholder="ex: fa-solid fa-plus" 
+                 [(ngModel)]="linkToAdd.icon">
+          <span class="favorite other">
+            <i [class]="linkToAdd.icon"></i>
+          </span>
+        </div>
+        <a class="link" href="https://fontawesome.com/search?o=r&m=free" 
+           target="_blank">Search for icons</a>
+      </div>
+
+      <div class="submit">
+        <button type="submit" class="orange-sq-btn">Add Link</button>
+      </div>
+    </form>
+  </div>
+</div>

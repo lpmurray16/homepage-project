@@ -1,0 +1,35 @@
+@import "variables";
+
+.floating-btn {
+    position: fixed;
+    z-index: 1000;
+
+    // Visuals
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: $white;
+    border: 3px solid $off-black;
+    box-shadow: 3px 3px 8px $off-black;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &.open {
+        background-color: $salmon;
+        transform: rotate(90deg);
+    }
+
+    // Positioning
+    &.bottom-right {
+        bottom: 20px;
+        right: 20px;
+    }
+}

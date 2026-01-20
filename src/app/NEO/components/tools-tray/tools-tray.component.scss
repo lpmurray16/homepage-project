@@ -1,0 +1,79 @@
+@import "../../../../variables";
+@import "../../../../buttons";
+
+.tools-tray-wrapper {
+  // Wrapper is now just a container, positioning is handled by children
+}
+
+.tray-menu {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out;
+
+  &.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+}
+
+.tray-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: $white;
+  border: 3px solid $off-black;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  min-width: 140px;
+  justify-content: space-between;
+
+  i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  &:hover {
+    transform: translateX(-5px);
+    background-color: $light-blue;
+  }
+
+  &.delete-btn {
+    &:hover {
+      background-color: $salmon;
+    }
+
+    &.active {
+      background-color: $salmon;
+      color: $white;
+      border-color: $jet;
+    }
+  }
+
+  &.edit-btn {
+    &:hover {
+      background-color: $manila;
+    }
+
+    &.active {
+      background-color: $manila;
+      border-color: $jet;
+    }
+  }
+}

@@ -2,48 +2,30 @@
   <!-- Header Section -->
   <header class="nb-container manilla-bg">
     <h1 class="text-center mt-1">
-      <i class="fa-solid fa-star nb-icon-apply lavendar"></i> 
+      <i class="fa-solid fa-star nb-icon-apply lavendar"></i>
       Welcome, Logan!
-      <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish" (click)="toggleSearch()"></i>
+      <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish" (click)="searchComp.toggleSearch()"></i>
     </h1>
-    <div *ngIf="isSearchVisible" class="search-container">
-      <input 
-        type="text" 
-        placeholder="Search links..." 
-        class="search-input"
-        [(ngModel)]="searchTerm"
-        (input)="onSearchInput($event)">
-      
-      <div class="search-results" *ngIf="searchTerm">
-        <div class="search-results-list">
-          <a *ngFor="let link of filteredLinks" 
-             [href]="link.url" 
-             target="_blank" 
-             class="search-result-item">
-            <i [class]="link.icon"></i>
-            <span>{{ link.title }}</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    <time class="time flex-container flex-column justify-center align-items-center my-1">
-      <div>{{ timeDate.dayName }}, {{ timeDate.month }} {{ timeDate.dayNumber }}</div>
-      <div>{{ timeDate.hours }}:{{ timeDate.minutes }}:{{ timeDate.seconds }} {{ timeDate.amOrPm }}</div>
-    </time>
+    <app-search #searchComp [allLinks]="allLinks"></app-search>
+    <app-clock></app-clock>
   </header>
 
   <!-- Links Sections -->
-  <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode">
+  <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
     <div class="nb-container white-bg" *ngFor="let sectionEntry of orderedSections">
       <div>
-        <h2 class="flex-container header {{sectionEntry.key}}">
+        <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
           {{ sectionEntry.key | titlecase }}
+          <i class="fa-solid toggle-icon" [class.fa-eye]="sectionEntry.isOpen"
+            [class.fa-eye-slash]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
+            title="Toggle Section Visibility">
+          </i>
         </h2>
-        <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
+        <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+          *ngIf="sectionEntry.isOpen">
           <p *ngFor="let link of sectionEntry.value" class="list-item">
-            <a [href]="!isDeleteMode ? link.url : null" 
-               [target]="!isDeleteMode ? '_blank' : null"
-               (click)="isDeleteMode ? removeLinkById(link) : null">
+            <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
+              [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
               {{ link.title }} <i [class]="link.icon"></i>
             </a>
           </p>
@@ -52,68 +34,25 @@
     </div>
   </div>
 
-  <!-- Floating Buttons -->
-  <button id="floating-button" (click)="openModal()" class="floating-button">
-    <i class="fa-solid fa-plus"></i>
-  </button>
-  <button id="floating-button-left" (click)="toggleDeleteMode()" class="floating-button-left">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+  <!-- Tools Tray -->
+  <app-tools-tray [isDeleteMode]="isDeleteMode" [isEditMode]="isEditMode" (addLink)="openModal()"
+    (deleteMode)="toggleDeleteMode()" (editMode)="toggleEditMode()" (addSection)="promptAddSection()"
+    (reorderSections)="toggleReorderMode()">
+  </app-tools-tray>
 
   <!-- Add Link Modal -->
-  <div id="modal" class="modal neo" [class.open]="modalOpen">
-    <div class="modal-content">
-      <button class="close orange-sq-btn" (click)="closeModal()">&times;</button>
-      <form id="link-form" (ngSubmit)="addLink()">
-        <div class="form-group">
-          <label for="section">Choose a section:</label>
-          <select id="section" name="section" [(ngModel)]="linkToAdd.section">
-            <option value="favorites">Favorites</option>
-            <option value="work">Work</option>
-            <option value="gaming">Gaming</option>
-            <option value="streaming">Streaming</option>
-            <option value="others">Others</option>
-            <option value="servers">Servers</option>
-            <option value="personal">Personal</option>
-            <option value="tools">Tools</option>
-            <option value="ai-tools">AI Tools</option>
-          </select>
-        </div>
+  <app-add-link-modal [isOpen]="modalOpen" (close)="closeModal()"></app-add-link-modal>
 
-        <div class="form-group">
-          <label for="url">URL:</label>
-          <input type="url" id="url" name="url" 
-                 placeholder="Enter URL" 
-                 [(ngModel)]="linkToAdd.url" 
-                 required>
-        </div>
+  <!-- Edit Link Modal -->
+  <app-edit-link-modal [isOpen]="editModalOpen" [linkToEdit]="linkToEdit" [sections]="sectionKeys"
+    (close)="closeEditModal()">
+  </app-edit-link-modal>
 
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" 
-                 placeholder="Enter title" 
-                 [(ngModel)]="linkToAdd.title" 
-                 required>
-        </div>
+  <!-- Add Section Modal -->
+  <app-add-section-modal [isOpen]="sectionModalOpen" [currentMaxOrder]="currentMaxOrder" (close)="closeSectionModal()">
+  </app-add-section-modal>
 
-        <div class="form-group">
-          <label for="icon">Icon:</label>
-          <div class="icon-wrapper">
-            <input type="text" id="icon" name="icon" 
-                   placeholder="ex: fa-solid fa-plus" 
-                   [(ngModel)]="linkToAdd.icon">
-            <span class="favorite other">
-              <i [class]="linkToAdd.icon"></i>
-            </span>
-          </div>
-          <a class="link" href="https://fontawesome.com/search?o=r&m=free" 
-             target="_blank">Search for icons</a>
-        </div>
-
-        <div class="submit">
-          <button type="submit" class="orange-sq-btn">Add Link</button>
-        </div>
-      </form>
-    </div>
-  </div>
+  <!-- Reorder Modal -->
+  <app-reorder-modal [isOpen]="reorderModalOpen" [sections]="orderedSections" (close)="closeReorderModal()">
+  </app-reorder-modal>
 </div>

@@ -225,6 +225,25 @@ h2 {
   &.closedSection {
     border-bottom: 0;
     background-color: $light-blue;
+    color: $off-black; // Better contrast on light blue
+  }
+
+  .toggle-icon {
+    margin-left: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &:hover {
+    .toggle-icon {
+      opacity: 1;
+    }
   }
 }
 
@@ -283,6 +302,21 @@ h2 {
     color: $off-black;
     box-shadow: none;
     cursor: crosshair;
+  }
+}
+
+.isEditMode .list-item a {
+  background-color: $manila;
+  color: $jet;
+  border: 3px solid #b8964e; // Darker version of manila/gold
+  box-shadow: 3px 3px 0 #b8964e;
+  cursor: alias;
+
+  &:hover {
+    background-color: #b8964e;
+    color: $white;
+    box-shadow: none;
+    transform: translate(2px, 2px);
   }
 }
 

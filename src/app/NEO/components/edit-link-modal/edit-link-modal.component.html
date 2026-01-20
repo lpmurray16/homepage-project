@@ -1,0 +1,51 @@
+<div id="modal" class="modal neo" [class.open]="isOpen">
+  <div class="modal-content">
+    <button class="close orange-sq-btn" (click)="closeModal()">&times;</button>
+    <form id="edit-link-form" (ngSubmit)="saveLink()">
+      <h2 class="text-center mb-1">Edit Link</h2>
+      
+      <div class="form-group">
+        <label for="edit-section">Choose a section:</label>
+        <select id="edit-section" name="section" [(ngModel)]="editableLink.section">
+          <option *ngFor="let section of sections" [value]="section">{{ section | titlecase }}</option>
+          <!-- Fallback options if sections array is empty or for consistency -->
+          <option *ngIf="!sections.includes(editableLink.section) && editableLink.section" [value]="editableLink.section">{{ editableLink.section | titlecase }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-url">URL:</label>
+        <input type="url" id="edit-url" name="url" 
+               placeholder="Enter URL" 
+               [(ngModel)]="editableLink.url" 
+               required>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-title">Title:</label>
+        <input type="text" id="edit-title" name="title" 
+               placeholder="Enter title" 
+               [(ngModel)]="editableLink.title" 
+               required>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-icon">Icon:</label>
+        <div class="icon-wrapper">
+          <input type="text" id="edit-icon" name="icon" 
+                 placeholder="ex: fa-solid fa-plus" 
+                 [(ngModel)]="editableLink.icon">
+          <span class="favorite other">
+            <i [class]="editableLink.icon"></i>
+          </span>
+        </div>
+        <a class="link" href="https://fontawesome.com/search?o=r&m=free" 
+           target="_blank">Search for icons</a>
+      </div>
+
+      <div class="submit">
+        <button type="submit" class="orange-sq-btn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>

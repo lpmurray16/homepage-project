@@ -1,0 +1,18 @@
+<div id="modal" class="modal neo" [class.open]="isOpen">
+  <div class="modal-content">
+    <button class="close orange-sq-btn" (click)="closeModal()">&times;</button>
+    <p class="subtitle">Drag and drop to reorder</p>
+    <div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
+      <div class="section-item" *ngFor="let section of localSections" cdkDrag>
+        <div class="section-handle" cdkDragHandle>
+          <i class="fa-solid fa-grip-vertical"></i>
+        </div>
+        <span class="section-name">{{ section.key | titlecase }}</span>
+      </div>
+    </div>
+
+    <div class="submit">
+      <button class="orange-sq-btn" (click)="saveOrder()">Save Order</button>
+    </div>
+  </div>
+</div>

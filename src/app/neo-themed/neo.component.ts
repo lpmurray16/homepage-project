@@ -11,14 +11,15 @@ import {
   RealtimeDatabaseService,
   SectionConfig,
 } from '../services/realtimedatabase.service';
-import { AddLinkModalComponent } from './components/add-link-modal/add-link-modal.component';
-import { SearchComponent } from './components/search/search.component';
-import { ClockComponent } from './components/clock/clock.component';
-import { ToolsTrayComponent } from './components/tools-tray/tools-tray.component';
-import { AddSectionModalComponent } from './components/add-section-modal/add-section-modal.component';
-import { ReorderModalComponent } from './components/reorder-modal/reorder-modal.component';
-import { EditLinkModalComponent } from './components/edit-link-modal/edit-link-modal.component';
-import { DeleteSectionModalComponent } from './components/delete-section-modal/delete-section-modal.component';
+import { AddLinkModalComponent } from '../components/add-link-modal/add-link-modal.component';
+import { AddSectionModalComponent } from '../components/add-section-modal/add-section-modal.component';
+import { ClockComponent } from '../components/clock/clock.component';
+import { DeleteSectionModalComponent } from '../components/delete-section-modal/delete-section-modal.component';
+import { EditLinkModalComponent } from '../components/edit-link-modal/edit-link-modal.component';
+import { ReorderModalComponent } from '../components/reorder-modal/reorder-modal.component';
+import { SearchComponent } from '../components/search/search.component';
+import { ToolsTrayComponent } from '../components/tools-tray/tools-tray.component';
+
 
 interface SectionMap {
   [key: string]: Link[];

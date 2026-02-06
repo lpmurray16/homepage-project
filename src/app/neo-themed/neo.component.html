@@ -13,11 +13,11 @@
   <!-- Links Sections -->
   <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
     <div class="nb-container white-bg" *ngFor="let sectionEntry of orderedSections">
-      <div>
+      <div class="section-container">
         <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
           {{ sectionEntry.key | titlecase }}
-          <i class="fa-solid toggle-icon" [class.fa-eye]="sectionEntry.isOpen"
-            [class.fa-eye-slash]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
+          <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
+            [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
             title="Toggle Section Visibility">
           </i>
         </h2>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RealtimeDatabaseService } from '../../../services/realtimedatabase.service';
+import { RealtimeDatabaseService } from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-add-section-modal',

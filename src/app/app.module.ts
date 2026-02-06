@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
-import { NeoThemeModule } from "./NEO/neo.component";
+import { NeoThemeModule } from "./neo-themed/neo.component";
 
 @NgModule({
     declarations: [AppComponent],

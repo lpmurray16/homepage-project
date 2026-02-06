@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Link, RealtimeDatabaseService } from '../../../services/realtimedatabase.service';
+import { Link, RealtimeDatabaseService } from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-edit-link-modal',

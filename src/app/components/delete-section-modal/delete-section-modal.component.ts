@@ -9,7 +9,7 @@ import {
 import {
   RealtimeDatabaseService,
   Link,
-} from '../../../services/realtimedatabase.service';
+} from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-delete-section-modal',

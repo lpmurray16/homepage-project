@@ -1,5 +1,5 @@
-@import "../../variables";
-@import "../../flex";
+@import "src/_variables.scss";
+@import "src/_flex.scss";
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 // Variables
@@ -220,11 +220,11 @@ h2 {
   border-bottom: 2px solid $white;
   text-align: center;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
 
   &.closedSection {
     border-bottom: 0;
-    background-color: $light-blue;
+    background-color: $coral;
     color: $off-black; // Better contrast on light blue
   }
 
@@ -328,4 +328,11 @@ h2 {
 .floating-button-left {
   @include floating-button-base;
   left: 20px;
+}
+
+.section-container {
+	background: rgba(104, 104, 104, 0.09);
+	border: 2px solid #ffffff12;
+	box-shadow: 2px 2px 21px -8px #ffffff38;
+	border-radius: 5px;
 }

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { RealtimeDatabaseService } from '../../../services/realtimedatabase.service';
-import { Link } from '../../../services/realtimedatabase.service';
+import { RealtimeDatabaseService, Link } from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-reorder-modal',

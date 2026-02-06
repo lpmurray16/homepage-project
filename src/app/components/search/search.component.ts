@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Link } from '../../../services/realtimedatabase.service';
+import { Link } from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-search',

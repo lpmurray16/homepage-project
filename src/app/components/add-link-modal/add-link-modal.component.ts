@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   Link,
   RealtimeDatabaseService,
-} from '../../../services/realtimedatabase.service';
+} from '../../services/realtimedatabase.service';
 
 @Component({
   selector: 'app-add-link-modal',

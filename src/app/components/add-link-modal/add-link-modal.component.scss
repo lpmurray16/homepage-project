@@ -1,4 +1,4 @@
-@import "../../../../variables";
+@import "src/_variables.scss";
 
 $button-padding: 10px;
 
@@ -13,12 +13,4 @@ $button-padding: 10px;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.mb-1 {
-  margin-bottom: 1rem;
 }

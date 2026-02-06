@@ -1,4 +1,11 @@
-import { Component, NgModule, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  NgModule,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +27,6 @@ import { ReorderModalComponent } from '../components/reorder-modal/reorder-modal
 import { SearchComponent } from '../components/search/search.component';
 import { ToolsTrayComponent } from '../components/tools-tray/tools-tray.component';
 
-
 interface SectionMap {
   [key: string]: Link[];
 }
@@ -31,6 +37,8 @@ interface SectionMap {
   styleUrls: ['./neo.component.scss'],
 })
 export class NeoThemeComponent implements OnInit, OnDestroy {
+  @ViewChild('searchComp') searchComponent!: SearchComponent;
+
   modalOpen = false;
   sectionModalOpen = false;
   reorderModalOpen = false;
@@ -149,6 +157,32 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    // Check for Ctrl+K or /
+    if (
+      (event.ctrlKey && event.key === 'k') ||
+      (event.key === '/' && !this.isInputFocused(event))
+    ) {
+      event.preventDefault();
+      if (!this.searchComponent.isSearchVisible) {
+        this.searchComponent.toggleSearch();
+      } else {
+        this.searchComponent.focusInput();
+      }
+    }
+
+    // Close search on Escape
+    if (event.key === 'Escape' && this.searchComponent.isSearchVisible) {
+      this.searchComponent.toggleSearch();
+    }
+  }
+
+  private isInputFocused(event: KeyboardEvent): boolean {
+    const target = event.target as HTMLElement;
+    return target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
   }
 
   removeLinkById(link: Link): void {

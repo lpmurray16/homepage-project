@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Link } from '../../services/realtimedatabase.service';
@@ -6,10 +13,11 @@ import { Link } from '../../services/realtimedatabase.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Input() allLinks: Link[] = [];
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   searchTerm: string = '';
   filteredLinks: Link[] = [];
@@ -48,7 +56,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     this.filteredLinks = this.allLinks.filter((link) =>
-      link.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      link.title.toLowerCase().includes(this.searchTerm.toLowerCase()),
     );
   }
 
@@ -57,6 +65,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (!this.isSearchVisible) {
       this.searchTerm = '';
       this.filteredLinks = [];
+    } else {
+      setTimeout(() => {
+        this.focusInput();
+      }, 0);
+    }
+  }
+
+  focusInput(): void {
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
     }
   }
 }

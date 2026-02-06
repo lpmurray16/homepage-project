@@ -168,46 +168,29 @@ h2 {
 
   &.white-bg {
     background-color: transparent;
-    flex-basis: 32%;
+    display: inline-block;
+    width: 100%;
+    break-inside: avoid;
+    margin-bottom: $container-gap;
 
     @include mobile {
-      flex-basis: 100%;
+      width: 100%;
     }
   }
 }
 
 .sections-wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  gap: $container-gap;
-  justify-content: space-evenly;
+  column-count: 3;
+  column-gap: $container-gap;
   padding: 40px 60px;
 
   @include mobile {
+    column-count: 1;
     padding: 10px;
   }
 }
 
-.nb-icon-apply {
-  $shadow-offset: 1px;
-  $shadow-spread: 3px;
 
-  text-shadow:
-    -$shadow-offset -$shadow-offset 0 $shadow-black,
-    $shadow-offset -$shadow-offset 0 $shadow-black,
-    -$shadow-offset $shadow-offset 0 $shadow-black,
-    $shadow-offset $shadow-offset 0 $shadow-black,
-    $shadow-spread $shadow-spread 0 $shadow-black;
-
-  @each $color-name, $color-value in ('lavendar': $lavender,
-    'salmon': $salmon,
-    'greenish': $greenish,
-    'light-blue': $light-blue ) {
-    &.#{$color-name} {
-      color: $color-value;
-    }
-  }
-}
 
 .time {
   background-color: $black;
@@ -215,7 +198,7 @@ h2 {
 
 .header {
   padding: 1rem;
-  background-color: transparent;
+  background-color: #ffffff21;
   color: $white;
   border-bottom: 2px solid $white;
   text-align: center;
@@ -331,8 +314,8 @@ h2 {
 }
 
 .section-container {
-	background: rgba(104, 104, 104, 0.09);
-	border: 2px solid #ffffff12;
-	box-shadow: 2px 2px 21px -8px #ffffff38;
-	border-radius: 5px;
+  background: rgba(104, 104, 104, 0.09);
+  border: 2px solid #ffffff12;
+  box-shadow: 2px 2px 21px -8px #ffffff38;
+  border-radius: 5px;
 }

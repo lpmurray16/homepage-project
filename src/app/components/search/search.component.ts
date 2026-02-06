@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   searchTerm: string = '';
   filteredLinks: Link[] = [];
-  isSearchVisible = false;
+  isSearchVisible = true;
   private searchSubject = new Subject<string>();
   private subscriptions: Subscription[] = [];
 

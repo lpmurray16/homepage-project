@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RealtimeDatabaseService } from '../../services/realtimedatabase.service';
 
 @Component({
-  selector: 'app-add-section-modal',
-  templateUrl: './add-section-modal.component.html',
-  styleUrls: ['./add-section-modal.component.scss'],
+    selector: 'app-add-section-modal',
+    templateUrl: './add-section-modal.component.html',
+    styleUrls: ['./add-section-modal.component.scss'],
+    standalone: false
 })
 export class AddSectionModalComponent {
   @Input() isOpen = false;

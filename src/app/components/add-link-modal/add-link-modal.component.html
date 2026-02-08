@@ -5,40 +5,42 @@
       <div class="form-group">
         <label for="section">Choose a section:</label>
         <select id="section" name="section" [(ngModel)]="linkToAdd.section">
-          <option *ngFor="let section of sections" [value]="section">
-            {{ section | titlecase }}
-          </option>
+          @for (section of sections; track section) {
+            <option [value]="section">
+              {{ section | titlecase }}
+            </option>
+          }
         </select>
       </div>
 
       <div class="form-group">
         <label for="url">URL:</label>
-        <input type="url" id="url" name="url" 
-               placeholder="Enter URL" 
-               [(ngModel)]="linkToAdd.url" 
-               required>
+        <input type="url" id="url" name="url"
+          placeholder="Enter URL"
+          [(ngModel)]="linkToAdd.url"
+          required>
       </div>
 
       <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" 
-               placeholder="Enter title" 
-               [(ngModel)]="linkToAdd.title" 
-               required>
+        <input type="text" id="title" name="title"
+          placeholder="Enter title"
+          [(ngModel)]="linkToAdd.title"
+          required>
       </div>
 
       <div class="form-group">
         <label for="icon">Icon:</label>
         <div class="icon-wrapper">
-          <input type="text" id="icon" name="icon" 
-                 placeholder="ex: fa-solid fa-plus" 
-                 [(ngModel)]="linkToAdd.icon">
+          <input type="text" id="icon" name="icon"
+            placeholder="ex: fa-solid fa-plus"
+            [(ngModel)]="linkToAdd.icon">
           <span class="favorite other">
             <i [class]="linkToAdd.icon"></i>
           </span>
         </div>
-        <a class="link" href="https://fontawesome.com/search?o=r&m=free" 
-           target="_blank">Search for icons</a>
+        <a class="link" href="https://fontawesome.com/search?o=r&m=free"
+        target="_blank">Search for icons</a>
       </div>
 
       <div class="submit">

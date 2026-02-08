@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-tools-tray',
-  templateUrl: './tools-tray.component.html',
-  styleUrls: ['./tools-tray.component.scss'],
+    selector: 'app-tools-tray',
+    templateUrl: './tools-tray.component.html',
+    styleUrls: ['./tools-tray.component.scss'],
+    standalone: false
 })
 export class ToolsTrayComponent {
   @Input() isDeleteMode = false;

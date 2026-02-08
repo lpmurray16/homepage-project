@@ -2,25 +2,30 @@
   <div class="modal-content">
     <button class="close orange-sq-btn" (click)="closeModal()">&times;</button>
 
-    <div *ngIf="!selectedSection">
-      <p class="subtitle">Select a section to delete</p>
-      <div class="section-list">
-        <div class="section-item" *ngFor="let section of sections" (click)="selectSection(section)">
-          <span class="section-name">{{ section | titlecase }}</span>
-          <i class="fa-solid fa-trash-can text-danger"></i>
+    @if (!selectedSection) {
+      <div>
+        <p class="subtitle">Select a section to delete</p>
+        <div class="section-list">
+          @for (section of sections; track section) {
+            <div class="section-item" (click)="selectSection(section)">
+              <span class="section-name">{{ section | titlecase }}</span>
+              <i class="fa-solid fa-trash-can text-danger"></i>
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="selectedSection" class="confirmation-view">
-      <h3 class="text-danger">WARNING</h3>
-      <p>Are you sure you want to delete the <strong>{{ selectedSection | titlecase }}</strong> section?</p>
-      <p class="warning-text">This action cannot be undone and all links in this section will be lost!</p>
-
-      <div class="button-group">
-        <button class="orange-sq-btn" (click)="cancelSelection()">Cancel</button>
-        <button class="orange-sq-btn danger-btn" (click)="confirmDelete()">Yes, Delete It</button>
+    @if (selectedSection) {
+      <div class="confirmation-view">
+        <h3 class="text-danger">WARNING</h3>
+        <p>Are you sure you want to delete the <strong>{{ selectedSection | titlecase }}</strong> section?</p>
+        <p class="warning-text">This action cannot be undone and all links in this section will be lost!</p>
+        <div class="button-group">
+          <button class="orange-sq-btn" (click)="cancelSelection()">Cancel</button>
+          <button class="orange-sq-btn danger-btn" (click)="confirmDelete()">Yes, Delete It</button>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>

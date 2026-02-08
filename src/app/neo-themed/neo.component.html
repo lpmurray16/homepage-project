@@ -12,26 +12,32 @@
 
   <!-- Links Sections -->
   <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
-    <div class="nb-container white-bg" *ngFor="let sectionEntry of orderedSections">
-      <div class="section-container">
-        <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
-          {{ sectionEntry.key | titlecase }}
-          <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
-            [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
-            title="Toggle Section Visibility">
-          </i>
-        </h2>
-        <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-          *ngIf="sectionEntry.isOpen">
-          <p *ngFor="let link of sectionEntry.value" class="list-item">
-            <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
-              [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
-              {{ link.title }} <i [class]="link.icon"></i>
-            </a>
-          </p>
+    @for (sectionEntry of orderedSections; track sectionEntry) {
+      <div class="nb-container white-bg">
+        <div class="section-container">
+          <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
+            {{ sectionEntry.key | titlecase }}
+            <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
+              [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
+              title="Toggle Section Visibility">
+            </i>
+          </h2>
+          @if (sectionEntry.isOpen) {
+            <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+              >
+              @for (link of sectionEntry.value; track link) {
+                <p class="list-item">
+                  <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
+                    [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
+                    {{ link.title }} <i [class]="link.icon"></i>
+                  </a>
+                </p>
+              }
+            </div>
+          }
         </div>
       </div>
-    </div>
+    }
   </div>
 
   <!-- Tools Tray -->

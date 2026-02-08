@@ -3,9 +3,10 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RealtimeDatabaseService, Link } from '../../services/realtimedatabase.service';
 
 @Component({
-  selector: 'app-reorder-modal',
-  templateUrl: './reorder-modal.component.html',
-  styleUrls: ['./reorder-modal.component.scss'],
+    selector: 'app-reorder-modal',
+    templateUrl: './reorder-modal.component.html',
+    styleUrls: ['./reorder-modal.component.scss'],
+    standalone: false
 })
 export class ReorderModalComponent {
   @Input() isOpen = false;

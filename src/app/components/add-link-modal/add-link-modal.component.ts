@@ -5,9 +5,10 @@ import {
 } from '../../services/realtimedatabase.service';
 
 @Component({
-  selector: 'app-add-link-modal',
-  templateUrl: './add-link-modal.component.html',
-  styleUrls: ['./add-link-modal.component.scss'],
+    selector: 'app-add-link-modal',
+    templateUrl: './add-link-modal.component.html',
+    styleUrls: ['./add-link-modal.component.scss'],
+    standalone: false
 })
 export class AddLinkModalComponent {
   @Input() isOpen = false;

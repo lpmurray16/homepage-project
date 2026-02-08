@@ -12,9 +12,10 @@ import {
 } from '../../services/realtimedatabase.service';
 
 @Component({
-  selector: 'app-delete-section-modal',
-  templateUrl: './delete-section-modal.component.html',
-  styleUrls: ['./delete-section-modal.component.scss'],
+    selector: 'app-delete-section-modal',
+    templateUrl: './delete-section-modal.component.html',
+    styleUrls: ['./delete-section-modal.component.scss'],
+    standalone: false
 })
 export class DeleteSectionModalComponent implements OnChanges {
   @Input() isOpen = false;

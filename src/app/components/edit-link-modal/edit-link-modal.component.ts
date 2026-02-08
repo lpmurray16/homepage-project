@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from
 import { Link, RealtimeDatabaseService } from '../../services/realtimedatabase.service';
 
 @Component({
-  selector: 'app-edit-link-modal',
-  templateUrl: './edit-link-modal.component.html',
-  styleUrls: ['./edit-link-modal.component.scss'],
+    selector: 'app-edit-link-modal',
+    templateUrl: './edit-link-modal.component.html',
+    styleUrls: ['./edit-link-modal.component.scss'],
+    standalone: false
 })
 export class EditLinkModalComponent implements OnChanges {
   @Input() isOpen = false;

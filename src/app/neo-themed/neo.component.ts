@@ -32,9 +32,10 @@ interface SectionMap {
 }
 
 @Component({
-  selector: 'neo-theme',
-  templateUrl: './neo.component.html',
-  styleUrls: ['./neo.component.scss'],
+    selector: 'neo-theme',
+    templateUrl: './neo.component.html',
+    styleUrls: ['./neo.component.scss'],
+    standalone: false
 })
 export class NeoThemeComponent implements OnInit, OnDestroy {
   @ViewChild('searchComp') searchComponent!: SearchComponent;

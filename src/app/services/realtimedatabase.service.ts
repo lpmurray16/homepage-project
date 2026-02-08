@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, map, take } from 'rxjs';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -20,42 +20,48 @@ export interface SectionConfig {
   providedIn: 'root',
 })
 export class RealtimeDatabaseService {
-  constructor(private realtimeDb: AngularFireDatabase) {}
+  constructor(private realtimeDb: AngularFireDatabase, private injector: EnvironmentInjector) {}
 
   getLinks(): Observable<Link[]> {
-    return this.realtimeDb
-      .list<Link>('links')
-      .snapshotChanges()
-      .pipe(
-        map((actions) =>
-          actions
-            .map((a) => {
-              const data = a.payload.val() as Partial<Link>;
-              const id = a.payload.key;
-              return {
-                id: id ?? null,
-                section: data.section ?? '',
-                url: data.url ?? '',
-                title: data.title ?? '',
-                icon: data.icon ?? '',
-              } as Link;
-            })
-            .filter((link) => link.id !== null),
-        ),
-      );
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb
+        .list<Link>('links')
+        .snapshotChanges()
+        .pipe(
+          map((actions) =>
+            actions
+              .map((a) => {
+                const data = a.payload.val() as Partial<Link>;
+                const id = a.payload.key;
+                return {
+                  id: id ?? null,
+                  section: data.section ?? '',
+                  url: data.url ?? '',
+                  title: data.title ?? '',
+                  icon: data.icon ?? '',
+                } as Link;
+              })
+              .filter((link) => link.id !== null),
+          ),
+        )
+    );
   }
 
   getSectionConfigs(): Observable<Record<string, SectionConfig>> {
-    return this.realtimeDb
-      .object<Record<string, SectionConfig>>('config/sections')
-      .valueChanges()
-      .pipe(map((config) => config || {}));
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb
+        .object<Record<string, SectionConfig>>('config/sections')
+        .valueChanges()
+        .pipe(map((config) => config || {}))
+    );
   }
 
   setSectionConfig(sectionName: string, config: SectionConfig): Promise<void> {
-    return this.realtimeDb
-      .object(`config/sections/${sectionName}`)
-      .update(config);
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb
+        .object(`config/sections/${sectionName}`)
+        .update(config)
+    );
   }
 
   updateSectionSortOrders(updates: Record<string, number>): Promise<void> {
@@ -63,11 +69,15 @@ export class RealtimeDatabaseService {
     Object.keys(updates).forEach((key) => {
       updateObj[`config/sections/${key}/sortOrder`] = updates[key];
     });
-    return this.realtimeDb.object('/').update(updateObj);
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb.object('/').update(updateObj)
+    );
   }
 
   addLinkToDb(link: Link) {
-    return this.realtimeDb.list<Link>('links').push(link);
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb.list<Link>('links').push(link)
+    );
   }
 
   updateLink(link: Link): Promise<void> {
@@ -75,15 +85,19 @@ export class RealtimeDatabaseService {
       return Promise.reject('Link ID is missing');
     }
     const { id, ...data } = link;
-    return this.realtimeDb.object(`links/${id}`).update(data);
+    return runInInjectionContext(this.injector, () => 
+      this.realtimeDb.object(`links/${id}`).update(data)
+    );
   }
 
   removeLinkById(link: Link): Promise<void> {
     if (link.id) {
       const path = `links/${link.id}`;
-      return this.realtimeDb
-        .object(path)
-        .remove();
+      return runInInjectionContext(this.injector, () => 
+        this.realtimeDb
+          .object(path)
+          .remove()
+      );
     }
     return Promise.resolve();
   }
@@ -96,7 +110,9 @@ export class RealtimeDatabaseService {
 
     return Promise.all(deleteLinkPromises)
       .then(() => {
-        return this.realtimeDb.object(`config/sections/${sectionName}`).remove();
+        return runInInjectionContext(this.injector, () => 
+          this.realtimeDb.object(`config/sections/${sectionName}`).remove()
+        );
       });
   }
 }

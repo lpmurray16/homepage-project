@@ -1,0 +1,64 @@
+@import "src/_variables.scss";
+
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 220px;
+  max-width: 340px;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  font-family: $nunito;
+  font-weight: bold;
+  color: $off-black;
+  background-color: $white;
+  border: 3px solid $off-black;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  animation: toast-in 0.25s ease-out;
+
+  i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  &.success {
+    background-color: $greenish;
+  }
+
+  &.error {
+    background-color: $salmon;
+    color: $white;
+  }
+
+  &.info {
+    background-color: $light-blue;
+  }
+}
+
+.toast-message {
+  line-height: 1.2;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { NeoThemeModule } from "./neo-themed/neo.component";
+import { AppRoutingModule } from "./app-routing.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { NeoThemeModule } from "./neo-themed/neo.component";
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         FormsModule,
-        NeoThemeModule
+        NeoThemeModule,
+        AppRoutingModule
     ]
 })
 export class AppModule {}

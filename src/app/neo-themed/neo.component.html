@@ -10,13 +10,33 @@
     <app-clock></app-clock>
   </header>
 
+  <!-- Section view banner -->
+  @if (activeSection) {
+    <div class="nb-container manilla-bg section-banner flex-container justify-space-between">
+      <span>Viewing <strong>{{ activeSection | titlecase }}</strong></span>
+      <a routerLink="/" class="back-to-all">
+        <i class="fa-solid fa-arrow-left"></i> All sections
+      </a>
+    </div>
+  }
+
+  <!-- Section not found -->
+  @if (sectionNotFound) {
+    <div class="nb-container white-bg text-center">
+      <h2>Section "{{ activeSection | titlecase }}" not found</h2>
+      <a routerLink="/" class="back-to-all"><i class="fa-solid fa-arrow-left"></i> Back to all sections</a>
+    </div>
+  }
+
   <!-- Links Sections -->
   <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
-    @for (sectionEntry of orderedSections; track sectionEntry) {
+    @for (sectionEntry of visibleSections; track sectionEntry) {
       <div class="nb-container white-bg">
         <div class="section-container">
           <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
-            {{ sectionEntry.key | titlecase }}
+            <a [routerLink]="['/', sectionEntry.key]" class="section-link" title="View only this section">
+              {{ sectionEntry.key | titlecase }}
+            </a>
             <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
               [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
               title="Toggle Section Visibility">

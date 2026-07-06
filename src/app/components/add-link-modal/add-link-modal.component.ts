@@ -3,6 +3,7 @@ import {
   Link,
   RealtimeDatabaseService,
 } from '../../services/realtimedatabase.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-add-link-modal',
@@ -17,14 +18,20 @@ export class AddLinkModalComponent {
 
   linkToAdd: Link = this.getEmptyLink();
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {}
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private toast: ToastService,
+  ) {}
 
   addLink(): void {
     if (!this.isValidLink()) {
       return;
     }
+    const title = this.linkToAdd.title;
     this.realtimeDb.addLinkToDb(this.linkToAdd);
-    this.resetLinkToAdd();
+    this.toast.success(`Added "${title}"`);
+    // Reset the form but keep the modal open so multiple links can be added quickly
+    this.linkToAdd = this.getEmptyLink();
   }
 
   private isValidLink(): boolean {
@@ -44,11 +51,6 @@ export class AddLinkModalComponent {
     }
 
     return true;
-  }
-
-  private resetLinkToAdd(): void {
-    this.linkToAdd = this.getEmptyLink();
-    this.closeModal();
   }
 
   closeModal(): void {

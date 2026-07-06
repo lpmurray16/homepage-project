@@ -1,55 +1,80 @@
-@import "src/_variables.scss"; // Need variables? Yes, maybe colors?
+@import "src/_variables.scss";
+
 // search-container styles
 .search-container {
-  margin: 10px auto;
-  max-width: 300px;
+  margin: 12px auto;
+  max-width: 320px;
   position: relative;
+  font-family: "Space Grotesk", sans-serif;
 
   .search-input {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 10px 14px;
+    background-color: $black;
+    color: $white;
+    border: 3px solid $coral;
+    border-radius: 6px;
+    box-shadow: 3px 3px 0 $off-black;
+    font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.15s ease-in-out;
+
+    &::placeholder {
+      color: rgba(255, 255, 238, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
     &:focus {
       outline: none;
-      border-color: #666;
+      border-color: $light-blue;
+      box-shadow: 4px 4px 0 $off-black;
+      transform: translate(-1px, -1px);
     }
   }
 
   .search-results {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 8px);
     left: 0;
     right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 4px;
+    background: $black;
+    border: 3px solid $coral;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0 $off-black;
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .search-results-list {
       .search-result-item {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
+        gap: 10px;
+        padding: 10px 14px;
         text-decoration: none;
-        color: #333;
-        transition: background-color 0.2s;
+        color: $white;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(255, 255, 238, 0.12);
+        transition: all 0.15s ease-in-out;
+
+        &:last-child {
+          border-bottom: none;
+        }
 
         &:hover {
-          background-color: #f5f5f5;
+          background-color: $coral;
+          color: $off-black;
         }
 
         i {
           font-size: 14px;
           width: 20px;
           text-align: center;
+          flex-shrink: 0;
         }
 
         span {

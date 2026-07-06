@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RealtimeDatabaseService } from '../../services/realtimedatabase.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-add-section-modal',
@@ -14,7 +15,10 @@ export class AddSectionModalComponent {
 
   sectionName = '';
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {}
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private toast: ToastService,
+  ) {}
 
   addSection(): void {
     if (!this.sectionName.trim()) {
@@ -32,6 +36,7 @@ export class AddSectionModalComponent {
       sortOrder: this.currentMaxOrder + 1,
     });
 
+    this.toast.success(`Added section "${formattedName}"`);
     this.resetForm();
   }
 

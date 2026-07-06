@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Link, RealtimeDatabaseService } from '../../services/realtimedatabase.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-edit-link-modal',
@@ -15,7 +16,10 @@ export class EditLinkModalComponent implements OnChanges {
 
   editableLink: Link = this.getEmptyLink();
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {}
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private toast: ToastService,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['linkToEdit'] && this.linkToEdit) {
@@ -29,11 +33,12 @@ export class EditLinkModalComponent implements OnChanges {
     }
     this.realtimeDb.updateLink(this.editableLink)
       .then(() => {
+        this.toast.success(`Updated "${this.editableLink.title}"`);
         this.closeModal();
       })
       .catch((err) => {
         console.error('Error updating link:', err);
-        alert('Failed to update link');
+        this.toast.error('Failed to update link');
       });
   }
 

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { RealtimeDatabaseService, Link } from '../../services/realtimedatabase.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-reorder-modal',
@@ -18,7 +19,10 @@ export class ReorderModalComponent {
 
   localSections: { key: string; value: Link[]; sortOrder: number }[] = [];
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {}
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private toast: ToastService,
+  ) {}
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.localSections, event.previousIndex, event.currentIndex);
@@ -34,11 +38,12 @@ export class ReorderModalComponent {
 
     this.realtimeDb.updateSectionSortOrders(updates)
       .then(() => {
+        this.toast.success('Section order saved');
         this.closeModal();
       })
       .catch((err) => {
         console.error('Failed to update sort order', err);
-        alert('Failed to save order. Please try again.');
+        this.toast.error('Failed to save order. Please try again.');
       });
   }
 

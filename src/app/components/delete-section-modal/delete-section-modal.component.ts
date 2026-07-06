@@ -10,6 +10,7 @@ import {
   RealtimeDatabaseService,
   Link,
 } from '../../services/realtimedatabase.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-delete-section-modal',
@@ -25,7 +26,10 @@ export class DeleteSectionModalComponent implements OnChanges {
 
   selectedSection: string | null = null;
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {}
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private toast: ToastService,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isOpen']) {
@@ -43,15 +47,17 @@ export class DeleteSectionModalComponent implements OnChanges {
 
   confirmDelete(): void {
     if (this.selectedSection) {
+      const deletedSection = this.selectedSection;
       this.realtimeDb
-        .deleteSection(this.selectedSection, this.allLinks)
+        .deleteSection(deletedSection, this.allLinks)
         .then(() => {
+          this.toast.success(`Deleted section "${deletedSection}"`);
           this.selectedSection = null;
           this.closeModal();
         })
         .catch((err) => {
           console.error('Error deleting section:', err);
-          alert('Failed to delete section');
+          this.toast.error('Failed to delete section');
         });
     }
   }

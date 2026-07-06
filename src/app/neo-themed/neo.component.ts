@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
@@ -26,6 +27,8 @@ import { EditLinkModalComponent } from '../components/edit-link-modal/edit-link-
 import { ReorderModalComponent } from '../components/reorder-modal/reorder-modal.component';
 import { SearchComponent } from '../components/search/search.component';
 import { ToolsTrayComponent } from '../components/tools-tray/tools-tray.component';
+import { ToastComponent } from '../components/toast/toast.component';
+import { ToastService } from '../services/toast.service';
 
 interface SectionMap {
   [key: string]: Link[];
@@ -60,10 +63,47 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
   // We keep a raw map of all links for search
   allLinks: Link[] = [];
 
+  // The section key from the route, or null when viewing all sections
+  activeSection: string | null = null;
+
   private subscriptions: Subscription[] = [];
 
-  constructor(private realtimeDb: RealtimeDatabaseService) {
+  constructor(
+    private realtimeDb: RealtimeDatabaseService,
+    private route: ActivatedRoute,
+    private toast: ToastService,
+  ) {
     this.initializeDataSubscription();
+    this.initializeRouteSubscription();
+  }
+
+  private initializeRouteSubscription(): void {
+    const routeSub = this.route.paramMap.subscribe((params) => {
+      this.activeSection = params.get('section');
+    });
+    this.subscriptions.push(routeSub);
+  }
+
+  // Sections to render: all of them, or just the active one when routed
+  get visibleSections(): {
+    key: string;
+    value: Link[];
+    isOpen: boolean;
+    sortOrder: number;
+  }[] {
+    if (!this.activeSection) {
+      return this.orderedSections;
+    }
+    return this.orderedSections.filter((s) => s.key === this.activeSection);
+  }
+
+  // True when a section route is active but no matching section exists
+  get sectionNotFound(): boolean {
+    return (
+      !!this.activeSection &&
+      this.orderedSections.length > 0 &&
+      this.visibleSections.length === 0
+    );
   }
 
   private initializeDataSubscription(): void {
@@ -188,7 +228,13 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
 
   removeLinkById(link: Link): void {
     if (link.id) {
-      this.realtimeDb.removeLinkById(link);
+      this.realtimeDb
+        .removeLinkById(link)
+        .then(() => this.toast.success(`Deleted "${link.title}"`))
+        .catch((err) => {
+          console.error('Error deleting link:', err);
+          this.toast.error('Failed to delete link');
+        });
     }
   }
 
@@ -256,8 +302,9 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     AngularFireDatabaseModule,
     FormsModule,
     DragDropModule,
+    RouterModule,
   ],
-  exports: [NeoThemeComponent],
+  exports: [NeoThemeComponent, ToastComponent],
   declarations: [
     NeoThemeComponent,
     AddLinkModalComponent,
@@ -268,6 +315,7 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     ReorderModalComponent,
     EditLinkModalComponent,
     DeleteSectionModalComponent,
+    ToastComponent,
   ],
   providers: [],
 })

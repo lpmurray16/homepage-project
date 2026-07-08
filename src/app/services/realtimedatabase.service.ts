@@ -9,6 +9,7 @@ export interface Link {
   url: string;
   title: string;
   icon: string;
+  starred?: boolean;
 }
 
 export interface SectionConfig {
@@ -39,6 +40,7 @@ export class RealtimeDatabaseService {
                   url: data.url ?? '',
                   title: data.title ?? '',
                   icon: data.icon ?? '',
+                  starred: data.starred ?? false,
                 } as Link;
               })
               .filter((link) => link.id !== null),

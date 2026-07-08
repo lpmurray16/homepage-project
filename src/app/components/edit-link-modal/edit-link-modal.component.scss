@@ -22,3 +22,16 @@ $button-padding: 10px;
 .mb-1 {
   margin-bottom: 1rem;
 }
+
+.starred-checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: #ffd700;
+  }
+}

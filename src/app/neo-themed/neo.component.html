@@ -73,6 +73,9 @@
                     <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
                       [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
                       {{ link.title }} <i [class]="link.icon"></i>
+                      @if (link.starred) {
+                        <i class="fa-solid fa-star starred-indicator"></i>
+                      }
                     </a>
                   </p>
                 }

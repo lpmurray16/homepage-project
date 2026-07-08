@@ -47,6 +47,13 @@
         target="_blank">Search for icons</a>
       </div>
 
+      <div class="form-group starred-group">
+        <label for="edit-starred" class="starred-checkbox-label">
+          <input type="checkbox" id="edit-starred" name="starred" [(ngModel)]="editableLink.starred">
+          Starred
+        </label>
+      </div>
+
       <div class="submit">
         <button type="submit" class="orange-sq-btn">Save Changes</button>
       </div>

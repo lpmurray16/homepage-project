@@ -23,7 +23,7 @@
     }
 
     &.open {
-        background-color: $salmon;
+        background-color: var(--theme-accent, #{$salmon});
         transform: rotate(90deg);
     }
 

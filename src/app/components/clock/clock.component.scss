@@ -1,5 +1,6 @@
 @import "src/_variables.scss";
 
 .time {
-  background-color: $black;
+  background-color: var(--theme-surface, #{$black});
+  color: var(--theme-text, #{$white});
 }

@@ -13,3 +13,36 @@
 .text-center {
   text-align: center;
 }
+
+// ==========================================================================
+// Theme tokens
+// Default values below match the original "Classic" neo-brutalist theme.
+// A theme is switched at runtime by ThemeService, which toggles a
+// [data-theme] attribute on <html>. Add new themes by adding another
+// [data-theme='...'] block that overrides these custom properties.
+// ==========================================================================
+:root {
+  --theme-bg: #{$black};
+  --theme-surface: #{$black};
+  --theme-text: #{$white};
+  --theme-muted-text: rgba(255, 255, 238, 0.5);
+  --theme-accent: #{$coral};
+  --theme-accent-alt: #{$light-blue};
+  --theme-header-bg: #ffffff21;
+  --theme-shadow: #{$jet};
+  --theme-modal-bg: #{$white};
+  --theme-modal-text: #{$coral};
+}
+
+[data-theme="aurora"] {
+  --theme-bg: #0b0620;
+  --theme-surface: #17103a;
+  --theme-text: #f2e9ff;
+  --theme-muted-text: rgba(242, 233, 255, 0.55);
+  --theme-accent: #ff5fa2;
+  --theme-accent-alt: #22d3ee;
+  --theme-header-bg: rgba(124, 58, 237, 0.28);
+  --theme-shadow: #05010f;
+  --theme-modal-bg: #1c1440;
+  --theme-modal-text: #ff5fa2;
+}

@@ -10,11 +10,11 @@
   .search-input {
     width: 100%;
     padding: 10px 14px;
-    background-color: $black;
-    color: $white;
-    border: 3px solid $coral;
+    background-color: var(--theme-surface);
+    color: var(--theme-text);
+    border: 3px solid var(--theme-accent);
     border-radius: 6px;
-    box-shadow: 3px 3px 0 $off-black;
+    box-shadow: 3px 3px 0 var(--theme-shadow);
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
@@ -22,15 +22,15 @@
     transition: all 0.15s ease-in-out;
 
     &::placeholder {
-      color: rgba(255, 255, 238, 0.5);
+      color: var(--theme-muted-text);
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
     &:focus {
       outline: none;
-      border-color: $light-blue;
-      box-shadow: 4px 4px 0 $off-black;
+      border-color: var(--theme-accent-alt);
+      box-shadow: 4px 4px 0 var(--theme-shadow);
       transform: translate(-1px, -1px);
     }
   }
@@ -40,10 +40,10 @@
     top: calc(100% + 8px);
     left: 0;
     right: 0;
-    background: $black;
-    border: 3px solid $coral;
+    background: var(--theme-surface);
+    border: 3px solid var(--theme-accent);
     border-radius: 6px;
-    box-shadow: 4px 4px 0 $off-black;
+    box-shadow: 4px 4px 0 var(--theme-shadow);
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
@@ -55,7 +55,7 @@
         gap: 10px;
         padding: 10px 14px;
         text-decoration: none;
-        color: $white;
+        color: var(--theme-text);
         font-weight: 600;
         letter-spacing: 1px;
         border-bottom: 1px solid rgba(255, 255, 238, 0.12);
@@ -66,7 +66,7 @@
         }
 
         &:hover {
-          background-color: $coral;
+          background-color: var(--theme-accent);
           color: $off-black;
         }
 

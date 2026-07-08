@@ -51,6 +51,7 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
   isEditMode = false;
   editModalOpen = false;
   linkToEdit: Link | null = null;
+  sidebarOpen = false;
 
   // This will now hold the fully processed sections for the view
   orderedSections: {
@@ -250,6 +251,14 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     if (this.isEditMode) {
       this.isDeleteMode = false;
     }
+  }
+
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  closeSidebar(): void {
+    this.sidebarOpen = false;
   }
 
   onLinkClick(event: Event, link: Link): void {

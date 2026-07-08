@@ -1,63 +1,87 @@
 <div class="neo-theme-wrapper">
-  <!-- Header Section -->
-  <header class="nb-container manilla-bg">
-    <h1 class="text-center mt-1">
-      <i class="fa-solid fa-star nb-icon-apply lavendar"></i>
-      Welcome, Logan!
-      <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish" (click)="searchComp.toggleSearch()"></i>
-    </h1>
-    <app-search #searchComp [allLinks]="allLinks"></app-search>
-    <app-clock></app-clock>
-  </header>
+  <!-- Sidebar backdrop (mobile drawer only, Aurora theme) -->
+  <div class="sidebar-backdrop" [class.open]="sidebarOpen" (click)="closeSidebar()"></div>
 
-  <!-- Section view banner -->
-  @if (activeSection) {
-    <div class="nb-container manilla-bg section-banner flex-container justify-space-between">
-      <span>Viewing <strong>{{ activeSection | titlecase }}</strong></span>
-      <a routerLink="/" class="back-to-all">
-        <i class="fa-solid fa-arrow-left"></i> All sections
+  <!-- Section Navigation Sidebar (only shown in the Aurora theme) -->
+  <nav class="section-nav" [class.open]="sidebarOpen">
+    <a routerLink="/" class="section-nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      (click)="closeSidebar()">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>All Links</span>
+    </a>
+    @for (sectionEntry of orderedSections; track sectionEntry) {
+      <a [routerLink]="['/', sectionEntry.key]" class="section-nav-link" routerLinkActive="active"
+        (click)="closeSidebar()">
+        <i class="fa-solid fa-hashtag"></i>
+        <span>{{ sectionEntry.key | titlecase }}</span>
       </a>
-    </div>
-  }
+    }
+  </nav>
 
-  <!-- Section not found -->
-  @if (sectionNotFound) {
-    <div class="nb-container white-bg text-center">
-      <h2>Section "{{ activeSection | titlecase }}" not found</h2>
-      <a routerLink="/" class="back-to-all"><i class="fa-solid fa-arrow-left"></i> Back to all sections</a>
-    </div>
-  }
+  <div class="main-content">
+    <!-- Header Section -->
+    <header class="nb-container manilla-bg">
+      <button class="sidebar-toggle" (click)="toggleSidebar()" title="Toggle Sections Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <h1 class="text-center mt-1">
+        <i class="fa-solid fa-star nb-icon-apply lavendar"></i>
+        Welcome, Logan!
+        <i class="fa-solid fa-bolt-lightning nb-icon-apply greenish" (click)="searchComp.toggleSearch()"></i>
+      </h1>
+      <app-search #searchComp [allLinks]="allLinks"></app-search>
+      <app-clock></app-clock>
+    </header>
 
-  <!-- Links Sections -->
-  <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
-    @for (sectionEntry of visibleSections; track sectionEntry) {
-      <div class="nb-container white-bg">
-        <div class="section-container">
-          <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
-            <a [routerLink]="['/', sectionEntry.key]" class="section-link" title="View only this section">
-              {{ sectionEntry.key | titlecase }}
-            </a>
-            <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
-              [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
-              title="Toggle Section Visibility">
-            </i>
-          </h2>
-          @if (sectionEntry.isOpen) {
-            <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-              >
-              @for (link of sectionEntry.value; track link) {
-                <p class="list-item">
-                  <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
-                    [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
-                    {{ link.title }} <i [class]="link.icon"></i>
-                  </a>
-                </p>
-              }
-            </div>
-          }
-        </div>
+    <!-- Section view banner -->
+    @if (activeSection) {
+      <div class="nb-container manilla-bg section-banner flex-container justify-space-between">
+        <span>Viewing <strong>{{ activeSection | titlecase }}</strong></span>
+        <a routerLink="/" class="back-to-all">
+          <i class="fa-solid fa-arrow-left"></i> All sections
+        </a>
       </div>
     }
+
+    <!-- Section not found -->
+    @if (sectionNotFound) {
+      <div class="nb-container white-bg text-center">
+        <h2>Section "{{ activeSection | titlecase }}" not found</h2>
+        <a routerLink="/" class="back-to-all"><i class="fa-solid fa-arrow-left"></i> Back to all sections</a>
+      </div>
+    }
+
+    <!-- Links Sections -->
+    <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
+      @for (sectionEntry of visibleSections; track sectionEntry) {
+        <div class="nb-container white-bg">
+          <div class="section-container">
+            <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
+              <a [routerLink]="['/', sectionEntry.key]" class="section-link" title="View only this section">
+                {{ sectionEntry.key | titlecase }}
+              </a>
+              <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
+                [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
+                title="Toggle Section Visibility">
+              </i>
+            </h2>
+            @if (sectionEntry.isOpen) {
+              <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
+                >
+                @for (link of sectionEntry.value; track link) {
+                  <p class="list-item">
+                    <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
+                      [target]="(!isDeleteMode && !isEditMode) ? '_blank' : null" (click)="onLinkClick($event, link)">
+                      {{ link.title }} <i [class]="link.icon"></i>
+                    </a>
+                  </p>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
   </div>
 
   <!-- Tools Tray -->

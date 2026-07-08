@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
     selector: 'app-tools-tray',
@@ -17,6 +18,12 @@ export class ToolsTrayComponent {
   @Output() deleteSection = new EventEmitter<void>();
 
   isOpen = false;
+
+  constructor(public themeService: ThemeService) {}
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 
   toggleTray(): void {
     this.isOpen = !this.isOpen;

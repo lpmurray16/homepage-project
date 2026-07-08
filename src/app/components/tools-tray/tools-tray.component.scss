@@ -76,4 +76,11 @@
       border-color: $jet;
     }
   }
+
+  &.theme-btn {
+    &:hover {
+      background-color: var(--theme-accent, #{$royal-purple});
+      color: $white;
+    }
+  }
 }

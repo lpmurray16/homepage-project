@@ -42,8 +42,8 @@
 
     .link {
       text-decoration: none;
-      color: $light-blue;
-      border-bottom: 2px solid $light-blue;
+      color: var(--theme-accent-alt, #{$light-blue});
+      border-bottom: 2px solid var(--theme-accent-alt, #{$light-blue});
       transition: all 0.3s ease;
 
       &:hover {
@@ -75,10 +75,10 @@
   // Neo Theme Styles
   .neo & {
     background: {
-      color: $white;
+      color: var(--theme-modal-bg, #{$white});
       image: url(https://assets-global.website-files.com/64a57c993515a19c5be44331/64a57dfd5010c65e7752d89f_dot.svg);
     }
-    color: $coral;
+    color: var(--theme-modal-text, #{$coral});
     font: {
       family: $lexend;
       size: 1.5em;
@@ -113,7 +113,7 @@
     color: $coral;
 
     .neo & {
-      background-color: $white;
+      background-color: var(--theme-modal-bg, #{$white});
       border-radius: 0;
       @include neo-box;
     }
@@ -135,7 +135,7 @@
     padding: 6px;
 
     .neo & {
-      background-color: $white;
+      background-color: var(--theme-modal-bg, #{$white});
       color: $off-black;
       font: {
         size: 1em;
@@ -147,7 +147,7 @@
 
 // Close Button
 .close {
-  color: $coral;
+  color: var(--theme-modal-text, #{$coral});
   float: right;
   font-size: 40px;
   cursor: pointer;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export type ThemeName = 'default' | 'aurora';
+export type ThemeName = 'default' | 'synthwave';
 
 const STORAGE_KEY = 'logan-linkz-theme';
 
@@ -12,7 +12,7 @@ export class ThemeService {
 
   constructor() {
     const saved = localStorage.getItem(STORAGE_KEY) as ThemeName | null;
-    this.current = saved === 'aurora' ? 'aurora' : 'default';
+    this.current = saved === 'synthwave' ? 'synthwave' : 'default';
     this.applyTheme(this.current);
   }
 
@@ -27,7 +27,7 @@ export class ThemeService {
   }
 
   toggleTheme(): void {
-    this.setTheme(this.current === 'default' ? 'aurora' : 'default');
+    this.setTheme(this.current === 'default' ? 'synthwave' : 'default');
   }
 
   private applyTheme(theme: ThemeName): void {

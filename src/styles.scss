@@ -34,15 +34,15 @@
   --theme-modal-text: #{$coral};
 }
 
-[data-theme="aurora"] {
-  --theme-bg: #0b0620;
-  --theme-surface: #17103a;
-  --theme-text: #f2e9ff;
-  --theme-muted-text: rgba(242, 233, 255, 0.55);
-  --theme-accent: #ff5fa2;
-  --theme-accent-alt: #22d3ee;
-  --theme-header-bg: rgba(124, 58, 237, 0.28);
+[data-theme="synthwave"] {
+  --theme-bg: #0d0221;
+  --theme-surface: #1a0533;
+  --theme-text: #f0e6ff;
+  --theme-muted-text: rgba(240, 230, 255, 0.55);
+  --theme-accent: #ff2d87;
+  --theme-accent-alt: #00f5ff;
+  --theme-header-bg: rgba(255, 45, 135, 0.12);
   --theme-shadow: #05010f;
-  --theme-modal-bg: #1c1440;
-  --theme-modal-text: #ff5fa2;
+  --theme-modal-bg: #1a0533;
+  --theme-modal-text: #ff2d87;
 }

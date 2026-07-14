@@ -1,4 +1,4 @@
-@import "./variables";
+﻿@import "./variables";
 
 // Mixins
 @mixin mobile {
@@ -181,5 +181,110 @@
       background-color: $white;
       color: $off-teal;
     }
+  }
+}
+
+// ==========================================================================
+// Synthwave theme modal overrides
+// All hardcoded classic colors are replaced with neon pink / dark-purple.
+// Uses flat selectors so compiled CSS is correct for the data-theme on <html>.
+// ==========================================================================
+[data-theme="synthwave"] {
+
+  // Modal backdrop
+  .modal.neo {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  // Modal card
+  .neo .modal-content {
+    background-color: #1a0533;
+    background-image: none;
+    color: #ff2d87;
+    border: 1px solid rgba(255, 45, 135, 0.5);
+    box-shadow: 0 0 30px rgba(255, 45, 135, 0.2), 3px 3px 0 rgba(255, 45, 135, 0.4);
+  }
+
+  // Labels
+  .neo .modal-content label {
+    color: #ff2d87;
+    text-shadow: 0 0 8px rgba(255, 45, 135, 0.6);
+  }
+
+  // Section headings inside modal (e.g. "Edit Link" h2)
+  .neo .modal-content h2 {
+    color: #f0e6ff;
+    text-shadow: 0 0 10px rgba(255, 45, 135, 0.7);
+  }
+
+  // Inputs and selects
+  .neo .modal-content select,
+  .neo .modal-content input:not([type="checkbox"]) {
+    background-color: rgba(255, 45, 135, 0.08);
+    color: #f0e6ff;
+    border: 1px solid rgba(255, 45, 135, 0.4);
+    border-radius: 6px;
+    box-shadow: none;
+
+    &:focus {
+      border-color: #ff2d87;
+      box-shadow: 0 0 0 2px rgba(255, 45, 135, 0.25), 0 0 12px rgba(255, 45, 135, 0.2);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: rgba(240, 230, 255, 0.4);
+    }
+  }
+
+  // Dropdown options
+  .neo .modal-content select option {
+    background-color: #1a0533;
+    color: #f0e6ff;
+  }
+
+  // Close (Ã—) button
+  .neo .modal-content .close.orange-sq-btn {
+    background-color: rgba(255, 45, 135, 0.12);
+    color: #ff2d87;
+    border: 2px solid rgba(255, 45, 135, 0.5);
+    box-shadow: 0 0 10px rgba(255, 45, 135, 0.25);
+
+    &:hover {
+      background-color: #ff2d87;
+      color: #0d0221;
+      box-shadow: 0 0 16px rgba(255, 45, 135, 0.6);
+    }
+  }
+
+  // Submit / action buttons
+  .neo .modal-content .submit .orange-sq-btn,
+  .neo .modal-content .submit button {
+    background-color: #ff2d87;
+    color: #0d0221;
+    border: 2px solid #ff2d87;
+    box-shadow: 0 0 14px rgba(255, 45, 135, 0.45), 3px 3px 0 rgba(255, 45, 135, 0.3);
+
+    &:hover {
+      background-color: transparent;
+      color: #ff2d87;
+      box-shadow: 0 0 20px rgba(255, 45, 135, 0.7);
+    }
+  }
+
+  // "Search for icons" link inside the modal
+  .neo .modal-content .link {
+    color: #00f5ff;
+    border-bottom-color: #00f5ff;
+
+    &:hover {
+      color: #f0e6ff;
+      border-bottom-color: rgba(240, 230, 255, 0.4);
+    }
+  }
+
+  // Starred checkbox
+  .starred-checkbox-label input[type="checkbox"] {
+    accent-color: #ff2d87;
   }
 }

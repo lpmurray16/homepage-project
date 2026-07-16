@@ -51,23 +51,41 @@
       </div>
     }
 
+    <!-- Closed Sections Dock -->
+    @if (closedSections.length > 0) {
+      <div class="closed-sections-dock">
+        <h3 class="dock-title"><i class="fa-solid fa-folder-closed"></i> Collapsed Sections</h3>
+        <div class="dock-chips flex-container gap-1 flex-wrap">
+          @for (section of closedSections; track section) {
+            <div class="closed-chip" (click)="toggleSection(section.key)" title="Click to open section">
+              <span>{{ section.key | titlecase }}</span>
+              <i class="fa-solid fa-expand"></i>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
     <!-- Links Sections -->
-    <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode">
-      @for (sectionEntry of visibleSections; track sectionEntry) {
-        <div class="nb-container white-bg">
+    <div class="sections-wrapper" [class.isDeleteMode]="isDeleteMode" [class.isEditMode]="isEditMode" [class.single-section]="openSections.length === 1"
+         cdkDropList
+         [cdkDropListData]="openSections"
+         (cdkDropListDropped)="onSectionDrop($event)">
+      @for (sectionEntry of openSections; track sectionEntry) {
+        <div class="nb-container white-bg" cdkDrag [cdkDragDisabled]="!isEditMode">
           <div class="section-container">
-            <h2 class="flex-container header {{sectionEntry.key}}" [class.closedSection]="!sectionEntry.isOpen">
+            <h2 class="flex-container header {{sectionEntry.key}}">
+              @if (isEditMode) {
+                <i class="fa-solid fa-grip-vertical drag-handle" cdkDragHandle title="Drag to reorder section"></i>
+              }
               <a [routerLink]="['/', sectionEntry.key]" class="section-link" title="View only this section">
                 {{ sectionEntry.key | titlecase }}
               </a>
-              <i class="fa-solid" [class.fa-chevron-down]="sectionEntry.isOpen"
-                [class.fa-chevron-up]="!sectionEntry.isOpen" (click)="toggleSection(sectionEntry.key)"
-                title="Toggle Section Visibility">
+              <i class="fa-solid fa-chevron-up toggle-icon" (click)="toggleSection(sectionEntry.key)"
+                title="Collapse Section">
               </i>
             </h2>
-            @if (sectionEntry.isOpen) {
-              <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1"
-                >
+            <div class="link-list flex-container justify-space-evenly gap-1 flex-wrap my-1 mx-1">
                 @for (link of sectionEntry.value; track link) {
                   <p class="list-item">
                     <a [href]="(!isDeleteMode && !isEditMode) ? link.url : null"
@@ -80,7 +98,6 @@
                   </p>
                 }
               </div>
-            }
           </div>
         </div>
       }

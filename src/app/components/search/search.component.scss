@@ -65,7 +65,8 @@
           border-bottom: none;
         }
 
-        &:hover {
+        &:hover,
+        &.selected {
           background-color: var(--theme-accent);
           color: $off-black;
         }

@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   filteredLinks: Link[] = [];
   isSearchVisible = true;
+  selectedIndex: number = -1;
   private searchSubject = new Subject<string>();
   private subscriptions: Subscription[] = [];
 
@@ -47,7 +48,26 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   onSearchInput(event: any): void {
+    this.selectedIndex = -1;
     this.searchSubject.next(event.target.value);
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (!this.filteredLinks.length) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.selectedIndex = (this.selectedIndex + 1) % this.filteredLinks.length;
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.selectedIndex = this.selectedIndex <= 0 ? this.filteredLinks.length - 1 : this.selectedIndex - 1;
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      if (this.selectedIndex >= 0 && this.selectedIndex < this.filteredLinks.length) {
+        window.open(this.filteredLinks[this.selectedIndex].url, '_blank');
+        this.toggleSearch();
+      }
+    }
   }
 
   filterLinks(): void {
@@ -66,6 +86,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (!this.isSearchVisible) {
       this.searchTerm = '';
       this.filteredLinks = [];
+      this.selectedIndex = -1;
     } else {
       setTimeout(() => {
         this.focusInput();

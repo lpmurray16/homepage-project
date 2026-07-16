@@ -10,7 +10,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -107,6 +107,14 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
     );
   }
 
+  get openSections() {
+    return this.visibleSections.filter((s) => s.isOpen);
+  }
+
+  get closedSections() {
+    return this.visibleSections.filter((s) => !s.isOpen);
+  }
+
   private initializeDataSubscription(): void {
     const dataSub = combineLatest([
       this.realtimeDb.getLinks(),
@@ -176,6 +184,30 @@ export class NeoThemeComponent implements OnInit, OnDestroy {
         sortOrder: section.sortOrder,
       });
     }
+  }
+
+  onSectionDrop(event: CdkDragDrop<any[]>): void {
+    if (event.previousIndex === event.currentIndex) {
+      return;
+    }
+
+    const openSecs = [...this.openSections];
+    moveItemInArray(openSecs, event.previousIndex, event.currentIndex);
+
+    // Merge them back: open sections get the new order, closed sections go to the end
+    const closedSecs = [...this.closedSections];
+    const newOrdered = [...openSecs, ...closedSecs];
+
+    // Update sortOrder for all sections in Firebase to persist the new order
+    newOrdered.forEach((section, index) => {
+      section.sortOrder = index + 1;
+      this.realtimeDb.setSectionConfig(section.key, {
+        isOpen: section.isOpen,
+        sortOrder: section.sortOrder,
+      });
+    });
+
+    this.orderedSections = newOrdered;
   }
 
   promptAddSection(): void {

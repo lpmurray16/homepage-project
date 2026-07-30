@@ -4,3 +4,20 @@
   background-color: var(--theme-surface, #{$black});
   color: var(--theme-text, #{$white});
 }
+
+:host-context([data-theme="neobrutalism"]) {
+  display: block;
+  width: 100%;
+  text-align: center;
+
+  .time {
+    display: inline-flex;
+    padding: 8px 12px;
+    background: #ff8dc7;
+    color: var(--theme-text);
+    border: 3px solid var(--theme-text);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--theme-shadow);
+    font-weight: 700;
+  }
+}

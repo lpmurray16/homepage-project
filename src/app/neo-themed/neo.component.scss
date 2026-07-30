@@ -172,17 +172,20 @@ h2 {
     width: 100%;
     break-inside: avoid;
     margin-bottom: $container-gap;
-
-    @include mobile {
-      width: 100%;
-    }
   }
 }
 
 .sections-wrapper {
-  column-count: 3;
+  column-width: 22rem;
   column-gap: $container-gap;
   padding: 40px 60px;
+
+  &.single-section {
+    column-count: 1;
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+  }
 
   @include mobile {
     column-count: 1;
@@ -470,6 +473,183 @@ h2 {
 }
 
 // ==========================================================================
+// Neo-brutalism theme — playful flat color, hard outlines, and offset shadows.
+// The masonry layout remains shared with Classic and Synthwave.
+// ==========================================================================
+:host-context([data-theme="neobrutalism"]) {
+  .neo-theme-wrapper {
+    color: var(--theme-text);
+    letter-spacing: 1px;
+    background-color: var(--theme-bg);
+    background-image: radial-gradient(rgba(23, 23, 23, 0.2) 1.25px, transparent 1.25px);
+    background-size: 22px 22px;
+  }
+
+  .sections-wrapper {
+    column-width: auto;
+    column-count: 4;
+
+    &.single-section {
+      column-count: 1;
+    }
+  }
+
+  @media screen and (max-width: 1800px) {
+    .sections-wrapper {
+      column-count: 3;
+    }
+  }
+
+  @media screen and (max-width: 1350px) {
+    .sections-wrapper {
+      column-count: 2;
+    }
+  }
+
+  header.manilla-bg {
+    width: min(900px, calc(100% - 32px));
+    margin: 32px auto 18px;
+    padding: 22px 24px;
+    background: var(--theme-header-bg);
+    color: var(--theme-text);
+    border: 4px solid var(--theme-text);
+    border-radius: 4px;
+    box-shadow: 9px 9px 0 var(--theme-shadow);
+
+    h1 {
+      margin-bottom: 0.5rem;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+  }
+
+  .section-banner.manilla-bg {
+    padding: 14px 18px;
+    background: #9ce8d8;
+    border: 3px solid var(--theme-text);
+    border-radius: 2px;
+    box-shadow: 5px 5px 0 var(--theme-shadow);
+  }
+
+  .nb-container.white-bg {
+    background: var(--theme-surface);
+    border: 4px solid var(--theme-text);
+    border-radius: 3px;
+    box-shadow: 8px 8px 0 var(--theme-shadow);
+    overflow: hidden;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+
+    &:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0 var(--theme-shadow);
+    }
+  }
+
+  .section-container {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header {
+    padding: 1rem 1.1rem;
+    background: var(--theme-header-bg);
+    color: var(--theme-text);
+    border-bottom: 4px solid var(--theme-text);
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    .toggle-icon {
+      opacity: 1;
+    }
+  }
+
+  .nb-container.white-bg:nth-child(4n + 2) .header {
+    background: #ff8dc7;
+  }
+
+  .nb-container.white-bg:nth-child(4n + 3) .header {
+    background: #9ce8d8;
+  }
+
+  .nb-container.white-bg:nth-child(4n + 4) .header {
+    background: #a9d86e;
+  }
+
+  .link-list {
+    padding: 0.25rem;
+  }
+
+  .list-item a {
+    background: var(--theme-surface);
+    color: var(--theme-text);
+    border: 3px solid var(--theme-text);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--theme-shadow);
+    font-weight: 700;
+    transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+
+    &:hover {
+      background: var(--theme-accent);
+      color: var(--theme-text);
+      border-color: var(--theme-text);
+      box-shadow: 1px 1px 0 var(--theme-shadow);
+      transform: translate(3px, 3px);
+    }
+
+    &:focus-visible {
+      outline: 3px dashed var(--theme-text);
+      outline-offset: 4px;
+    }
+  }
+
+  .closed-sections-dock {
+    background: #9ce8d8;
+    color: var(--theme-text);
+    border: 4px solid var(--theme-text);
+    border-radius: 3px;
+    box-shadow: 7px 7px 0 var(--theme-shadow);
+
+    .closed-chip {
+      background: var(--theme-surface);
+      color: var(--theme-text);
+      border: 3px solid var(--theme-text);
+      border-radius: 2px;
+      box-shadow: 3px 3px 0 var(--theme-shadow);
+
+      &:hover {
+        background: var(--theme-header-bg);
+        color: var(--theme-text);
+        border-color: var(--theme-text);
+        box-shadow: 1px 1px 0 var(--theme-shadow);
+        transform: translate(2px, 2px);
+      }
+    }
+  }
+
+  .cdk-drag-preview,
+  .cdk-drag-placeholder {
+    border-radius: 2px;
+  }
+
+  @include mobile {
+    header.manilla-bg {
+      width: calc(100% - 24px);
+      padding: 18px 14px;
+      box-shadow: 6px 6px 0 var(--theme-shadow);
+    }
+
+    .sections-wrapper {
+      column-count: 1;
+      padding: 14px 12px 64px;
+    }
+  }
+}
+
+// ==========================================================================
 // Synthwave theme â€” animated neon backdrop + glowing card layout.
 // All functionality (search, CRUD, routing) is unchanged from Aurora.
 // ==========================================================================
@@ -716,21 +896,9 @@ h2 {
 
   // Responsive card grid beside the sidebar
   .sections-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    align-items: start;
-    gap: 20px;
-    width: 100%;
     padding: 24px 40px 60px;
-    
-    &.single-section {
-      grid-template-columns: 1fr;
-      max-width: 800px;
-      margin: 0 auto;
-    }
 
     @include mobile {
-      grid-template-columns: 1fr;
       padding: 16px;
     }
   }
@@ -742,7 +910,6 @@ h2 {
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 245, 255, 0.04);
     overflow: hidden;
-    margin-bottom: 0;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
     &:hover {

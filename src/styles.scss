@@ -46,3 +46,16 @@
   --theme-modal-bg: #1a0533;
   --theme-modal-text: #ff2d87;
 }
+
+[data-theme="neobrutalism"] {
+  --theme-bg: #f7f1df;
+  --theme-surface: #fffdf4;
+  --theme-text: #171717;
+  --theme-muted-text: rgba(23, 23, 23, 0.58);
+  --theme-accent: #ff5d3a;
+  --theme-accent-alt: #25c2a0;
+  --theme-header-bg: #ffd43b;
+  --theme-shadow: #171717;
+  --theme-modal-bg: #fffdf4;
+  --theme-modal-text: #171717;
+}

@@ -52,6 +52,13 @@
   line-height: 1.2;
 }
 
+:host-context([data-theme="neobrutalism"]) .toast {
+  color: var(--theme-text);
+  border: 3px solid var(--theme-text);
+  border-radius: 2px;
+  box-shadow: 5px 5px 0 var(--theme-shadow);
+}
+
 @keyframes toast-in {
   from {
     opacity: 0;

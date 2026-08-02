@@ -1,10 +1,11 @@
+@use "./variables" as *;
+@use "./overrides";
+@use "./loader";
+@use "./flex";
+@use "./modal";
+@use "./spacing";
+
 @import "@fortawesome/fontawesome-free/css/all.css";
-@import "./variables";
-@import "./overrides";
-@import "./loader";
-@import "./flex";
-@import "./modal";
-@import "./spacing";
 
 .clickable {
   cursor: pointer;

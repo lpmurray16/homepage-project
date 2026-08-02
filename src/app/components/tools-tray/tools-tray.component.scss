@@ -1,5 +1,5 @@
-@import "src/_variables.scss";
-@import "src/_buttons.scss";
+@use "src/variables" as *;
+@use "src/buttons";
 
 .tools-tray-wrapper {
   // Wrapper is now just a container, positioning is handled by children

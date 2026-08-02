@@ -1,7 +1,6 @@
 import { Injectable, EnvironmentInjector, runInInjectionContext } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, map, take } from 'rxjs';
-import { AngularFireModule } from '@angular/fire/compat';
 
 export interface Link {
   id?: string | null;

@@ -77,38 +77,25 @@
     }
   }
 
-  &.theme-btn {
-    &:hover {
-      background-color: var(--theme-accent, #{$royal-purple});
-      color: $white;
-    }
+}
+
+.tray-item,
+.floating-btn {
+  background: var(--theme-surface);
+  color: var(--theme-text);
+  border: 3px solid var(--theme-text);
+  border-radius: 2px;
+  box-shadow: 5px 5px 0 var(--theme-shadow);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+
+  &:hover {
+    background: var(--theme-header-bg);
+    color: var(--theme-text);
+    box-shadow: 2px 2px 0 var(--theme-shadow);
+    transform: translate(3px, 3px);
   }
 }
 
-:host-context([data-theme="neobrutalism"]) {
-  .tray-item,
-  .floating-btn {
-    background: var(--theme-surface);
-    color: var(--theme-text);
-    border: 3px solid var(--theme-text);
-    border-radius: 2px;
-    box-shadow: 5px 5px 0 var(--theme-shadow);
-    transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
-
-    &:hover {
-      background: var(--theme-header-bg);
-      color: var(--theme-text);
-      box-shadow: 2px 2px 0 var(--theme-shadow);
-      transform: translate(3px, 3px);
-    }
-  }
-
-  .tray-item.theme-btn:hover {
-    background: #ff8dc7;
-    color: var(--theme-text);
-  }
-
-  .floating-btn.open {
-    background: var(--theme-accent);
-  }
+.floating-btn.open {
+  background: var(--theme-accent);
 }

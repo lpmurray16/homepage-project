@@ -86,26 +86,24 @@
   }
 }
 
-:host-context([data-theme="neobrutalism"]) {
-  .search-container {
-    .search-input,
-    .search-results {
-      background: var(--theme-surface);
-      color: var(--theme-text);
-      border: 3px solid var(--theme-text);
-      border-radius: 2px;
-      box-shadow: 4px 4px 0 var(--theme-shadow);
-    }
+.search-container {
+  .search-input,
+  .search-results {
+    background: var(--theme-surface);
+    color: var(--theme-text);
+    border: 3px solid var(--theme-text);
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 var(--theme-shadow);
+  }
 
-    .search-input:focus {
-      border-color: var(--theme-text);
-      box-shadow: 6px 6px 0 var(--theme-shadow);
-    }
+  .search-input:focus {
+    border-color: var(--theme-text);
+    box-shadow: 6px 6px 0 var(--theme-shadow);
+  }
 
-    .search-results .search-results-list .search-result-item:hover,
-    .search-results .search-results-list .search-result-item.selected {
-      background: var(--theme-accent-alt);
-      color: var(--theme-text);
-    }
+  .search-results .search-results-list .search-result-item:hover,
+  .search-results .search-results-list .search-result-item.selected {
+    background: var(--theme-accent-alt);
+    color: var(--theme-text);
   }
 }

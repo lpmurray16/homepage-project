@@ -52,7 +52,7 @@
   line-height: 1.2;
 }
 
-:host-context([data-theme="neobrutalism"]) .toast {
+.toast {
   color: var(--theme-text);
   border: 3px solid var(--theme-text);
   border-radius: 2px;

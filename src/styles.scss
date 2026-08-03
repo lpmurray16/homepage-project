@@ -1,4 +1,3 @@
-@use "./variables" as *;
 @use "./overrides";
 @use "./loader";
 @use "./flex";
@@ -15,40 +14,8 @@
   text-align: center;
 }
 
-// ==========================================================================
-// Theme tokens
-// Default values below match the original "Classic" neo-brutalist theme.
-// A theme is switched at runtime by ThemeService, which toggles a
-// [data-theme] attribute on <html>. Add new themes by adding another
-// [data-theme='...'] block that overrides these custom properties.
-// ==========================================================================
+// Neo Brutalism design tokens
 :root {
-  --theme-bg: #{$black};
-  --theme-surface: #{$black};
-  --theme-text: #{$white};
-  --theme-muted-text: rgba(255, 255, 238, 0.5);
-  --theme-accent: #{$coral};
-  --theme-accent-alt: #{$light-blue};
-  --theme-header-bg: #ffffff21;
-  --theme-shadow: #{$jet};
-  --theme-modal-bg: #{$white};
-  --theme-modal-text: #{$coral};
-}
-
-[data-theme="synthwave"] {
-  --theme-bg: #0d0221;
-  --theme-surface: #1a0533;
-  --theme-text: #f0e6ff;
-  --theme-muted-text: rgba(240, 230, 255, 0.55);
-  --theme-accent: #ff2d87;
-  --theme-accent-alt: #00f5ff;
-  --theme-header-bg: rgba(255, 45, 135, 0.12);
-  --theme-shadow: #05010f;
-  --theme-modal-bg: #1a0533;
-  --theme-modal-text: #ff2d87;
-}
-
-[data-theme="neobrutalism"] {
   --theme-bg: #f7f1df;
   --theme-surface: #fffdf4;
   --theme-text: #171717;
